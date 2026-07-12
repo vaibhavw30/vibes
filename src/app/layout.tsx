@@ -50,7 +50,7 @@ export default function RootLayout({
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.35 }}
+          style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.45 }}
         />
         <a
           href="#main"
