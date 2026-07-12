@@ -40,6 +40,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontVariables} h-full`}>
       <body className="min-h-full antialiased">
+        {/*
+         * The painting — a fixed, faded, site-wide background (the "Daydream sky"
+         * theme). Sits above the body's sky-gradient base and below all content;
+         * frosted panels blur it behind cards. Opacity is the single tuning knob.
+         * ASSET: save the Higgsfield oil painting to `public/hero-park.jpg`; until
+         * then the body sky-gradient shows through as a graceful fallback.
+         */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.62 }}
+        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-bg-2 focus:px-4 focus:py-2 focus:text-text-hi"

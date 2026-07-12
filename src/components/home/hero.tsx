@@ -5,21 +5,17 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { heroHeadline, heroRoles, heroSublinePrefix } from "@/content/site";
 
 /*
- * Home hero — "Daydream sky". The Higgsfield oil painting (a bright park scene)
- * is the hero's full-bleed background and its signature visual. The ink headline
- * (the LCP element — still plain text, never gated on the image) sits over a soft
- * light scrim so it stays AA-legible against the painted sky. The sub-line's final
- * word cycles through heroRoles on a masked vertical slide (transform + opacity).
+ * Home hero — "Daydream sky". The Higgsfield oil painting is a fixed, faded,
+ * site-wide background (layout.tsx); the hero just lays a soft light scrim behind
+ * the headline for legibility. The ink headline is the LCP element (plain text,
+ * never gated on the image). The sub-line's final word cycles through heroRoles on
+ * a masked vertical slide (transform + opacity).
  *
  * NOTE (pending Vaibhav / Claude Design): the LiquidityField signature moment was
- * removed here — particles clash with the busy painted park. The component is kept
+ * removed from the hero — particles clash with the painting. The component is kept
  * at ./liquidity-field.tsx (and documented in DESIGN_HANDOFF §9) for reuse. The
- * "one interactive moment" question is now open: options include a subtle cursor
- * parallax/drift on the painting, or relocating the field to a sky-only context.
- *
- * ASSET: save the painting to `public/hero-park.jpg`. Until it exists, the fixed
- * body sky-gradient (globals.css) shows through as a graceful fallback. Positioning
- * (object-position) and scrim strength want a visual tune once the asset is in.
+ * "one interactive moment" question is open (e.g. a subtle parallax on the fixed
+ * painting, or a sky-only field).
  */
 const CYCLE_MS = 2400;
 
@@ -40,23 +36,15 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-[88svh] w-full items-center overflow-hidden">
-      {/* The painting — full-bleed hero background (decorative). CSS background so a
-          missing asset falls back cleanly to the body sky-gradient (no broken icon).
-          Swap to <next/image> for optimization once the asset is committed. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-park.jpg')" }}
-      />
-
-      {/* Legibility scrim — brighter on the left where the headline sits, clearing
-          toward the right so the clouds/park stay visible. Tune with the asset. */}
+      {/* The painting is the site-wide fixed background (layout.tsx). Here we only
+          lay a soft, left-weighted light scrim behind the headline so the ink text
+          stays AA-legible over the sky. Tune strength once the asset is in. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(100deg, rgba(247,250,252,0.88) 0%, rgba(247,250,252,0.6) 30%, rgba(247,250,252,0.2) 54%, rgba(247,250,252,0) 74%)",
+            "linear-gradient(100deg, rgba(247,250,252,0.72) 0%, rgba(247,250,252,0.4) 32%, rgba(247,250,252,0.08) 58%, rgba(247,250,252,0) 76%)",
         }}
       />
 

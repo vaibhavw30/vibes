@@ -811,17 +811,17 @@ Pick a direction in §20.3 (or a blend), lock a new token system (4–6 surface 
 
 The Higgsfield asset is a **bright plein-air park oil painting**: cloud-dappled blue sky (top ~50%), a tree line, then a green park with paths, small figures (walking, cycling, picnicking), and flowers in the foreground. Wide landscape (~16:9). It's fairly saturated and **busy in the lower half**, which drives two decisions:
 
-1. **Painting is HERO-only (model b, now confirmed).** The busy lower half makes it unusable as a full-site background behind text. It's the hero's full-bleed background + signature visual; every other page keeps the airy sky-tint gradient (legibility). Wired in `hero.tsx` as a CSS `background-image: url('/hero-park.jpg')` layer with a graceful fallback to the body gradient when absent.
-2. **LiquidityField removed from the hero.** Gold/blue particles clash with the painted park. The painting is now the hero's visual. The component + §9 docs are kept for reuse. **Open question:** the PRD wants one *interactive* moment — candidates to restore it: a subtle cursor parallax/drift on the painting, or a sky-only version of the field. Deferred to Claude Design.
+1. **Painting is a SITE-WIDE faded background (owner decision).** It's a fixed, full-viewport background layer at lowered opacity (currently `0.62`, `bg-cover bg-center`) in `layout.tsx`, sitting above the body sky-gradient base and below all content; frosted panels blur it behind cards. The single tuning knob is the layer's `opacity`. Graceful fallback to the sky-gradient when the asset is absent. (Earlier draft had it hero-only; the owner wants the picture itself, slightly faded, behind the whole site.)
+2. **LiquidityField removed from the hero.** Gold/blue particles clash with the painted park. The component + §9 docs are kept for reuse. **Open question:** the PRD wants one *interactive* moment — candidates to restore it: a subtle cursor parallax/drift on the fixed painting, or a sky-only version of the field. Deferred to Claude Design.
 
-**Legibility handling (hero):** the ink headline sits over a left-weighted light scrim (`linear-gradient(100deg, rgba(247,250,252,0.88) → 0)`) so it reads against the painted sky while clouds/park stay visible on the right.
+**Legibility handling:** frosted panels (`.frost`) carry most content (cards, tiles), reading cleanly over the blurred painting. Bare-text surfaces (the hero headline, About paragraphs, detail "why") rely on the faded painting + a soft scrim behind the hero headline (`linear-gradient(100deg, rgba(247,250,252,0.72) → 0)`). This is the main risk area — see tuning below.
 
 **Needs the human + visual tuning (cannot be verified without the asset in `public/`):**
 - Save the painting to **`public/hero-park.jpg`**.
-- Tune `object-position` / hero height so the composition frames well (the painting is wide; an 88svh hero crops it — a shorter hero or a specific crop may frame the sky-behind-headline better).
-- Tune scrim strength for AA on the actual sky values (may need white text instead of ink in the hero if the sky reads too dark under the headline).
-- Optimize: swap the CSS background for `<next/image>` (priority, responsive `sizes`), and ship a compressed webp/avif.
-- Harmonize the token palette with the painting's real hues (its sky blue, greens, warm path, figure pops) — the current tokens were tuned to the placeholder gradient.
+- Tune the background layer's **opacity** and **position** (`bg-center` shows the busy horizon band; `bg-top` shows the calmer sky — better legibility, less park) against the real image.
+- Verify **AA on bare-text pages** (About, detail) over the faded park — if marginal, fade the background more, add a subtle white veil, or put those pages' text on light frosted sheets.
+- Optimize: consider `<next/image>` for the background (or a pre-compressed webp/avif); a fixed CSS background of a large JPG can hurt LCP/perf.
+- Harmonize the token palette with the painting's real hues (sky blue, greens, warm path, figure pops) — current tokens were tuned to the placeholder gradient.
 - Resolve the interactive-moment question (see above).
 
 ---
