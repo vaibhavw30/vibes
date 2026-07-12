@@ -36,9 +36,15 @@ export function Hero() {
 
   return (
     <section className="relative flex min-h-[88svh] w-full items-center overflow-hidden">
-      {/* The painting is the site-wide fixed background (layout.tsx). Here we only
-          lay a soft, left-weighted light scrim behind the headline so the ink text
-          stays AA-legible over the sky. Tune strength once the asset is in. */}
+      {/* The site-wide fixed painting (layout.tsx) is faded to 0.4 so body text on
+          content pages stays AA-legible. The hero wants it vivid, so we layer a
+          second, more-opaque copy of the painting just here. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.55 }}
+      />
+      {/* Soft, left-weighted light scrim behind the headline for legibility. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
