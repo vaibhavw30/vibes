@@ -807,6 +807,23 @@ Pick a direction in §20.3 (or a blend), lock a new token system (4–6 surface 
 
 **Buildable now, before the asset lands:** the entire sky token system + frosted-panel surface primitive + component retints + field recolor can be built against a placeholder sky gradient, so the Higgsfield painting drops straight into a finished theme. That de-risks the image dependency and lets the reskin proceed in parallel.
 
+### 20.7 Asset arrived — real-painting integration state
+
+The Higgsfield asset is a **bright plein-air park oil painting**: cloud-dappled blue sky (top ~50%), a tree line, then a green park with paths, small figures (walking, cycling, picnicking), and flowers in the foreground. Wide landscape (~16:9). It's fairly saturated and **busy in the lower half**, which drives two decisions:
+
+1. **Painting is HERO-only (model b, now confirmed).** The busy lower half makes it unusable as a full-site background behind text. It's the hero's full-bleed background + signature visual; every other page keeps the airy sky-tint gradient (legibility). Wired in `hero.tsx` as a CSS `background-image: url('/hero-park.jpg')` layer with a graceful fallback to the body gradient when absent.
+2. **LiquidityField removed from the hero.** Gold/blue particles clash with the painted park. The painting is now the hero's visual. The component + §9 docs are kept for reuse. **Open question:** the PRD wants one *interactive* moment — candidates to restore it: a subtle cursor parallax/drift on the painting, or a sky-only version of the field. Deferred to Claude Design.
+
+**Legibility handling (hero):** the ink headline sits over a left-weighted light scrim (`linear-gradient(100deg, rgba(247,250,252,0.88) → 0)`) so it reads against the painted sky while clouds/park stay visible on the right.
+
+**Needs the human + visual tuning (cannot be verified without the asset in `public/`):**
+- Save the painting to **`public/hero-park.jpg`**.
+- Tune `object-position` / hero height so the composition frames well (the painting is wide; an 88svh hero crops it — a shorter hero or a specific crop may frame the sky-behind-headline better).
+- Tune scrim strength for AA on the actual sky values (may need white text instead of ink in the hero if the sky reads too dark under the headline).
+- Optimize: swap the CSS background for `<next/image>` (priority, responsive `sizes`), and ship a compressed webp/avif.
+- Harmonize the token palette with the painting's real hues (its sky blue, greens, warm path, figure pops) — the current tokens were tuned to the placeholder gradient.
+- Resolve the interactive-moment question (see above).
+
 ---
 
 ## Appendix A — Complete class-string reference (per component/element/state)
