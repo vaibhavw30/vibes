@@ -155,7 +155,7 @@ export function ProjectsGrid({ projects }: { projects: Project[] }) {
       </p>
 
       {filtered.length === 0 ? (
-        <div className="mt-10 rounded-xl border border-dashed border-border px-6 py-16 text-center">
+        <div className="frost mt-10 rounded-xl border border-dashed border-border bg-bg-1/70 px-6 py-16 text-center">
           <p className="text-body text-text-mid">
             No projects match that combination yet.
           </p>

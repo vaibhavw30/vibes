@@ -37,6 +37,23 @@ export function Hero() {
 
   return (
     <section className="relative mx-auto flex min-h-[88svh] w-full max-w-6xl flex-col justify-center overflow-hidden px-6 pt-28 pb-20">
+      {/*
+       * Painterly sky placeholder for the hero — soft cloud forms + a warm sun wash
+       * over the body's base sky gradient. This is where the Higgsfield oil painting
+       * drops in later (swap for a <next/image> cover layer). Kept bright in the
+       * upper-left so the ink headline stays legible.
+       */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(55% 45% at 18% 32%, rgba(255,255,255,0.6), transparent 62%)," +
+            "radial-gradient(45% 32% at 74% 20%, rgba(255,255,255,0.5), transparent 60%)," +
+            "radial-gradient(60% 48% at 88% 82%, rgba(224,166,60,0.12), transparent 72%)",
+        }}
+      />
+
       <LiquidityField />
 
       <motion.p

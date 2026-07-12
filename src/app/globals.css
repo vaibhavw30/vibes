@@ -2,43 +2,57 @@
 @import "tw-animate-css";
 
 /*
-  Design tokens — derived from STYLE.md.
-  Governing principle: "calm canvas, alive objects."
-  Layered near-black palette (never flat #000); ONE restrained accent.
-  The accent is a single-line change: swap --accent below and rebuild.
+  Design tokens — "Daydream sky" light theme (redesign; see docs/DESIGN_HANDOFF.md §20.6).
+  Governing principle: "calm canvas, alive objects" — the canvas is now a bright,
+  slightly-faded day-sky (an oil painting when the Higgsfield asset lands; a layered
+  gradient placeholder until then). Content floats on frosted-glass panels over it.
+  Ties to the hero line "Building the things I imagined as a kid" — sky, looking up,
+  daydreaming. ONE accent; a single-line swap of --accent re-tints everything.
+
+  Legibility law for this theme: body text sits either on a bright sky region or on
+  a frosted panel (never on raw, variable painterly regions). Verify AA against the
+  *lightest panel value*, not the sky.
 */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Surfaces — near-black with depth, not pure #000 */
-  --bg-0: #0a0b0d; /* page base */
-  --bg-1: #101216; /* raised surface / cards */
-  --bg-2: #16191f; /* higher surface / hovered cards */
-  --bg-3: #1e222a; /* borders-as-fills, inset panels */
+  /* Sky gradient stops (the placeholder painting; swap for the real asset later) */
+  --sky-top: #f3f8fc; /* high, bright, near-white warm */
+  --sky-mid: #dcebf7; /* mid powder blue */
+  --sky-low: #c4dcef; /* lower, deeper powder cerulean */
+  --sky-warm: #fbf3e6; /* faint warm sun wash */
 
-  /* Text */
-  --text-hi: #ececec; /* primary headings / body high */
-  --text-mid: #a8adb5; /* secondary */
-  --text-lo: #6b7079; /* muted / captions / metadata */
+  /* Surfaces — frosted glass floating over the sky (translucent white + blur) */
+  --bg-0: #dcebf7; /* solid sky-tint fallback (behind the fixed sky) */
+  --bg-1: rgba(255, 255, 255, 0.6); /* frosted panel / card */
+  --bg-2: rgba(255, 255, 255, 0.82); /* frosted panel hover / higher */
+  --bg-3: rgba(255, 255, 255, 0.44); /* subtle inset / lighter panel */
 
-  /* Borders — hairline, low-contrast */
-  --border: #1f242c;
-  --border-strong: #2a313b;
+  /* Text — warm ink, never pure black */
+  --text-hi: #1b2735; /* primary headings / body high */
+  --text-mid: #41505f; /* secondary */
+  --text-lo: #64717f; /* muted / captions / metadata (AA on frosted white) */
+
+  /* Borders — soft, low-contrast on light */
+  --border: rgba(27, 39, 53, 0.14);
+  --border-strong: rgba(27, 39, 53, 0.26);
 
   /*
-    Accent — ONE. Restrained, considered off-tone (not neon).
-    LOCKED: soft violet #c8b6ff (owner sign-off, 2026-07). The identity accent.
-    Standby alternates (kept on file; swap this single line to change):
-      #7dd3c0 muted teal · #e8b04b warm amber · #9fb4ff periwinkle
-    Justification: docs/IMPLEMENTATION_PLAN.md (accent build note).
+    Accent — ONE. Sky-coherent, deep enough to read as text on frosted white.
+    Deep cerulean — the sky itself, concentrated. (The old identity violet retires.)
+    Standby alternates (swap this single line): #2a7d6a deep teal · #b06a1f ochre.
+    The signature field pairs this cool accent with a warm gold (canvas-only).
   */
-  --accent: #c8b6ff;
-  --accent-muted: color-mix(in oklab, var(--accent) 18%, transparent);
+  --accent: #2a67a6; /* deep cerulean */
+  --accent-muted: color-mix(in oklab, var(--accent) 16%, transparent);
+
+  /* Warm counterpart — the "sun". Canvas/field + rare warm accents only. */
+  --sun: #e0a63c;
 
   /* Secondary tint — data/quant contexts ONLY, very sparing */
-  --data-pos: #5fcf9e; /* up / positive — market tick */
-  --data-neg: #d9736b; /* down / negative */
+  --data-pos: #23896a; /* up / positive — market tick (deepened for light) */
+  --data-neg: #c65b4e; /* down / negative */
 
   /* Fluid type scale (clamp) — from STYLE.md */
   --fs-hero: clamp(2.75rem, 7vw, 6rem);
@@ -49,12 +63,12 @@
   --fs-small: 0.875rem;
   --fs-mono: 0.8125rem;
 
-  /* type-tag colors (color-code visuals off the ONE type tag; max 5) */
-  --tag-internship: #9fb4ff; /* periwinkle */
-  --tag-founding: #e8b04b; /* amber */
-  --tag-research: #7dd3c0; /* teal */
-  --tag-personal: #c8b6ff; /* violet (== accent family) */
-  --tag-hackathon: #d9a0c8; /* muted magenta */
+  /* type-tag colors — re-derived for a LIGHT ground (deeper, AA as small text on white) */
+  --tag-internship: #3557b8; /* blue */
+  --tag-founding: #8a6410; /* dark goldenrod */
+  --tag-research: #1f7a66; /* teal */
+  --tag-personal: #5a49b8; /* violet */
+  --tag-hackathon: #a8437f; /* magenta */
 }
 
 @theme inline {
@@ -76,6 +90,7 @@
   /* Accent + data ticks */
   --color-accent: var(--accent);
   --color-accent-muted: var(--accent-muted);
+  --color-sun: var(--sun);
   --color-data-pos: var(--data-pos);
   --color-data-neg: var(--data-neg);
 
@@ -108,7 +123,22 @@
   }
 
   body {
-    background: var(--bg-0);
+    /*
+      The sky. A fixed, high-key, slightly-faded day-sky gradient — the placeholder
+      for the Higgsfield oil painting. Swap this for the image (a fixed, cover
+      background layer) when it lands; the token system and panels are already tuned
+      for a light painterly ground.
+    */
+    background:
+      radial-gradient(120% 80% at 78% 6%, var(--sky-warm) 0%, transparent 42%),
+      linear-gradient(
+        180deg,
+        var(--sky-top) 0%,
+        var(--sky-mid) 46%,
+        var(--sky-low) 100%
+      );
+    background-attachment: fixed;
+    background-color: var(--bg-0);
     color: var(--text-hi);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     font-size: var(--fs-body);
@@ -135,6 +165,20 @@
   /* Body copy should never run full-width */
   .measure {
     max-width: 68ch;
+  }
+
+  /*
+    Frosted glass — the surface treatment for panels floating over the sky. Sets
+    ONLY blur + a soft float shadow, so bg/border stay token-driven via utilities
+    (bg-bg-1, hover:bg-bg-2, border-border) with no specificity conflict. Apply
+    alongside those utilities on cards, tiles, nav, and placeholder panels.
+  */
+  .frost {
+    -webkit-backdrop-filter: blur(14px) saturate(118%);
+    backdrop-filter: blur(14px) saturate(118%);
+    box-shadow:
+      0 1px 2px rgba(27, 39, 53, 0.05),
+      0 14px 34px -18px rgba(27, 39, 53, 0.28);
   }
 }
 

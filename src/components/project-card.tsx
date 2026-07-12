@@ -18,7 +18,7 @@ export function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group flex h-full flex-col rounded-xl border border-border bg-bg-1 p-6 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+      className="frost group flex h-full flex-col rounded-xl border border-border bg-bg-1 p-6 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
     >
       <div className="flex items-center justify-between gap-3">
         <TypePill tag={project.typeTag} />
