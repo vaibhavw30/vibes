@@ -54,7 +54,7 @@ export function InterestSubpage({
  */
 export function ComingLive({ note }: { note: string }) {
   return (
-    <div className="rounded-xl border border-dashed border-border bg-bg-1/60 px-6 py-16 text-center">
+    <div className="frost rounded-xl border border-dashed border-border bg-bg-1/70 px-6 py-16 text-center">
       <p className="measure mx-auto text-small leading-relaxed text-text-mid">
         {note}
       </p>

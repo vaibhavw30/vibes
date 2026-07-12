@@ -37,8 +37,9 @@ function makeGlow([r, g, b]: [number, number, number]): HTMLCanvasElement {
   c.height = S;
   const g2 = c.getContext("2d")!;
   const grad = g2.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
-  grad.addColorStop(0, `rgba(${r},${g},${b},0.85)`);
-  grad.addColorStop(0.4, `rgba(${r},${g},${b},0.32)`);
+  // Denser centers so the dabs read as paint over a bright sky, not faint glow.
+  grad.addColorStop(0, `rgba(${r},${g},${b},0.95)`);
+  grad.addColorStop(0.45, `rgba(${r},${g},${b},0.45)`);
   grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
   g2.fillStyle = grad;
   g2.fillRect(0, 0, S, S);
@@ -66,9 +67,11 @@ export function LiquidityField() {
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
+    // Sky-native pairing: warm gold (--sun) bids vs cool cerulean (--accent) asks —
+    // reads as light and air over the painting, like dabs of oil paint.
     const css = getComputedStyle(document.documentElement);
-    const bidRgb = hexToRgb(css.getPropertyValue("--data-pos")) ?? [95, 207, 158];
-    const askRgb = hexToRgb(css.getPropertyValue("--accent")) ?? [200, 182, 255];
+    const bidRgb = hexToRgb(css.getPropertyValue("--sun")) ?? [224, 166, 60];
+    const askRgb = hexToRgb(css.getPropertyValue("--accent")) ?? [42, 103, 166];
     const bidSprite = makeGlow(bidRgb);
     const askSprite = makeGlow(askRgb);
 
@@ -190,17 +193,18 @@ export function LiquidityField() {
 
         const sprite = px < midX ? bidSprite : askSprite;
         const s = p.size * (0.55 + p.r * 0.85);
-        // Deeper in the book (low r) reads a touch stronger; edges twinkle.
-        const twinkle = 0.72 + 0.28 * Math.sin(t * 0.0016 * p.spd + p.tw);
-        ctx!.globalAlpha = (0.1 + (1 - p.r) * 0.34) * twinkle;
+        // Deeper in the book (low r) reads a touch stronger; edges twinkle. Alpha
+        // runs higher than the dark theme so the dabs hold up over a bright sky.
+        const twinkle = 0.74 + 0.26 * Math.sin(t * 0.0016 * p.spd + p.tw);
+        ctx!.globalAlpha = (0.2 + (1 - p.r) * 0.5) * twinkle;
         ctx!.drawImage(sprite, x - s / 2, y - s / 2, s, s);
       }
 
-      // Faint mid-price seam.
-      ctx!.globalAlpha = 0.14;
+      // Faint mid-price seam — a soft ink line so it reads on the bright sky.
+      ctx!.globalAlpha = 0.18;
       const seam = ctx!.createLinearGradient(0, baseline - maxH, 0, baseline);
-      seam.addColorStop(0, `rgba(${askRgb[0]},${askRgb[1]},${askRgb[2]},0)`);
-      seam.addColorStop(1, `rgba(236,236,236,0.5)`);
+      seam.addColorStop(0, `rgba(27,39,53,0)`);
+      seam.addColorStop(1, `rgba(27,39,53,0.5)`);
       ctx!.strokeStyle = seam;
       ctx!.lineWidth = 1;
       ctx!.beginPath();

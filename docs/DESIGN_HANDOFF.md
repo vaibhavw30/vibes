@@ -807,6 +807,23 @@ Pick a direction in §20.3 (or a blend), lock a new token system (4–6 surface 
 
 **Buildable now, before the asset lands:** the entire sky token system + frosted-panel surface primitive + component retints + field recolor can be built against a placeholder sky gradient, so the Higgsfield painting drops straight into a finished theme. That de-risks the image dependency and lets the reskin proceed in parallel.
 
+### 20.7 Asset arrived — real-painting integration state
+
+The Higgsfield asset is a **bright plein-air park oil painting**: cloud-dappled blue sky (top ~50%), a tree line, then a green park with paths, small figures (walking, cycling, picnicking), and flowers in the foreground. Wide landscape (~16:9). It's fairly saturated and **busy in the lower half**, which drives two decisions:
+
+1. **Painting is a SITE-WIDE faded background (owner decision).** It's a fixed, full-viewport background layer in `layout.tsx` (`bg-cover bg-center`), above the body sky-gradient base and below all content; frosted panels blur it behind cards. Graceful fallback to the sky-gradient when the asset is absent. **Two opacity knobs** balance vividness vs. the AA legibility floor: the global layer is faded to **`0.45`** (owner's chosen balance) so bare body text on content pages (About, detail) stays readable over the busy painted park, and the **hero re-layers a second, more-opaque copy (`0.55`)** so the hero reads vivid. The asset is committed as an optimized JPG (`public/hero-park.jpg`, 2560px, ~1MB, converted from a 9.6MB PNG). **The proper upgrade** (to make the painting *more* vivid site-wide while keeping AA): put bare-text content on light frosted "sheets" rather than fading the painting — deferred to Claude Design.
+2. **LiquidityField removed from the hero.** Gold/blue particles clash with the painted park. The component + §9 docs are kept for reuse. **Open question:** the PRD wants one *interactive* moment — candidates to restore it: a subtle cursor parallax/drift on the fixed painting, or a sky-only version of the field. Deferred to Claude Design.
+
+**Legibility handling:** frosted panels (`.frost`) carry most content (cards, tiles), reading cleanly over the blurred painting. Bare-text surfaces (the hero headline, About paragraphs, detail "why") rely on the faded painting + a soft scrim behind the hero headline (`linear-gradient(100deg, rgba(247,250,252,0.72) → 0)`). This is the main risk area — see tuning below.
+
+**Needs the human + visual tuning (cannot be verified without the asset in `public/`):**
+- Save the painting to **`public/hero-park.jpg`**.
+- Tune the background layer's **opacity** and **position** (`bg-center` shows the busy horizon band; `bg-top` shows the calmer sky — better legibility, less park) against the real image.
+- Verify **AA on bare-text pages** (About, detail) over the faded park — if marginal, fade the background more, add a subtle white veil, or put those pages' text on light frosted sheets.
+- Optimize: consider `<next/image>` for the background (or a pre-compressed webp/avif); a fixed CSS background of a large JPG can hurt LCP/perf.
+- Harmonize the token palette with the painting's real hues (sky blue, greens, warm path, figure pops) — current tokens were tuned to the placeholder gradient.
+- Resolve the interactive-moment question (see above).
+
 ---
 
 ## Appendix A — Complete class-string reference (per component/element/state)

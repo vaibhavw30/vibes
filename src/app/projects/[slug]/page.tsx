@@ -173,7 +173,7 @@ export default async function ProjectDetailPage({
               {project.metrics.map((m) => (
                 <div
                   key={m.label}
-                  className="rounded-xl border border-border bg-bg-1 px-5 py-4"
+                  className="frost rounded-xl border border-border bg-bg-1 px-5 py-4"
                 >
                   <dt className="font-mono text-mono uppercase tracking-wider text-text-lo">
                     {m.label}
@@ -234,7 +234,7 @@ export default async function ProjectDetailPage({
 /* Placeholder for a demo walkthrough — no videos recorded yet (Phase 6). */
 function DemoPlaceholder() {
   return (
-    <div className="flex aspect-video w-full flex-col items-center justify-center rounded-xl border border-dashed border-border bg-bg-1 text-center">
+    <div className="frost flex aspect-video w-full flex-col items-center justify-center rounded-xl border border-dashed border-border bg-bg-1 text-center">
       <Play className="size-7 text-text-lo" aria-hidden="true" />
       <p className="mt-3 font-mono text-mono uppercase tracking-wider text-text-lo">
         Demo walkthrough coming soon
@@ -250,7 +250,7 @@ function DemoPlaceholder() {
  */
 function ComingSoonTease({ demoUrl }: { demoUrl: string | null }) {
   return (
-    <div className="relative overflow-hidden rounded-xl border border-border bg-bg-1">
+    <div className="frost relative overflow-hidden rounded-xl border border-border bg-bg-1">
       {/* redacted-lines backdrop — purely decorative, no real content */}
       <div
         aria-hidden="true"

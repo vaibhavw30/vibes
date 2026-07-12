@@ -49,7 +49,7 @@ export function BeyondCode() {
           <RevealItem key={tile.label} className="h-full">
             <Link
               href={tile.href}
-              className="group flex h-full flex-col justify-between gap-6 rounded-xl border border-border bg-bg-1 p-5 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              className="frost group flex h-full flex-col justify-between gap-6 rounded-xl border border-border bg-bg-1 p-5 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-mono uppercase tracking-wider text-text-lo">

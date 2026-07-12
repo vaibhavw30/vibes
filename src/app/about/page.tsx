@@ -103,7 +103,7 @@ function InterestTile({ interest }: { interest: (typeof interests)[number] }) {
     return (
       <Link
         href={interest.href}
-        className="group flex h-full flex-col justify-between rounded-xl border border-border bg-bg-1 p-5 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+        className="frost group flex h-full flex-col justify-between rounded-xl border border-border bg-bg-1 p-5 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
       >
         {body}
       </Link>
@@ -111,7 +111,7 @@ function InterestTile({ interest }: { interest: (typeof interests)[number] }) {
   }
 
   return (
-    <div className="flex h-full flex-col justify-between rounded-xl border border-border bg-bg-1/60 p-5">
+    <div className="frost flex h-full flex-col justify-between rounded-xl border border-border bg-bg-1/70 p-5">
       {body}
     </div>
   );
