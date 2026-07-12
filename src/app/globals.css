@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+  Design tokens — derived from STYLE.md.
+  Governing principle: "calm canvas, alive objects."
+  Layered near-black palette (never flat #000); ONE restrained accent.
+  The accent is a single-line change: swap --accent below and rebuild.
+*/
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces — near-black with depth, not pure #000 */
+  --bg-0: #0a0b0d; /* page base */
+  --bg-1: #101216; /* raised surface / cards */
+  --bg-2: #16191f; /* higher surface / hovered cards */
+  --bg-3: #1e222a; /* borders-as-fills, inset panels */
+
+  /* Text */
+  --text-hi: #ececec; /* primary headings / body high */
+  --text-mid: #a8adb5; /* secondary */
+  --text-lo: #6b7079; /* muted / captions / metadata */
+
+  /* Borders — hairline, low-contrast */
+  --border: #1f242c;
+  --border-strong: #2a313b;
+
+  /*
+    Accent — ONE. Restrained, considered off-tone (not neon).
+    LOCKED: soft violet #c8b6ff (owner sign-off, 2026-07). The identity accent.
+    Standby alternates (kept on file; swap this single line to change):
+      #7dd3c0 muted teal · #e8b04b warm amber · #9fb4ff periwinkle
+    Justification: docs/IMPLEMENTATION_PLAN.md (accent build note).
+  */
+  --accent: #c8b6ff;
+  --accent-muted: color-mix(in oklab, var(--accent) 18%, transparent);
+
+  /* Secondary tint — data/quant contexts ONLY, very sparing */
+  --data-pos: #5fcf9e; /* up / positive — market tick */
+  --data-neg: #d9736b; /* down / negative */
+
+  /* Fluid type scale (clamp) — from STYLE.md */
+  --fs-hero: clamp(2.75rem, 7vw, 6rem);
+  --fs-h1: clamp(2rem, 4vw, 3.25rem);
+  --fs-h2: clamp(1.5rem, 2.5vw, 2.25rem);
+  --fs-h3: 1.25rem;
+  --fs-body: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-mono: 0.8125rem;
+
+  /* type-tag colors (color-code visuals off the ONE type tag; max 5) */
+  --tag-internship: #9fb4ff; /* periwinkle */
+  --tag-founding: #e8b04b; /* amber */
+  --tag-research: #7dd3c0; /* teal */
+  --tag-personal: #c8b6ff; /* violet (== accent family) */
+  --tag-hackathon: #d9a0c8; /* muted magenta */
+}
+
+@theme inline {
+  /* Surfaces */
+  --color-bg-0: var(--bg-0);
+  --color-bg-1: var(--bg-1);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+
+  /* Text */
+  --color-text-hi: var(--text-hi);
+  --color-text-mid: var(--text-mid);
+  --color-text-lo: var(--text-lo);
+
+  /* Borders */
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  /* Accent + data ticks */
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-data-pos: var(--data-pos);
+  --color-data-neg: var(--data-neg);
+
+  /* type-tag colors */
+  --color-tag-internship: var(--tag-internship);
+  --color-tag-founding: var(--tag-founding);
+  --color-tag-research: var(--tag-research);
+  --color-tag-personal: var(--tag-personal);
+  --color-tag-hackathon: var(--tag-hackathon);
+
+  /* Fonts (wired in layout via next/font) */
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+
+  /* Type scale */
+  --text-hero: var(--fs-hero);
+  --text-h1: var(--fs-h1);
+  --text-h2: var(--fs-h2);
+  --text-h3: var(--fs-h3);
+  --text-body: var(--fs-body);
+  --text-small: var(--fs-small);
+  --text-mono: var(--fs-mono);
+}
+
+@layer base {
+  html {
+    /* Lenis drives scroll; keep native smooth off to avoid double-easing */
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: var(--bg-0);
+    color: var(--text-hi);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif), Georgia, serif;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  /* Quality floor: visible keyboard focus everywhere (accent ring) */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  /* Body copy should never run full-width */
+  .measure {
+    max-width: 68ch;
+  }
+}
+
+/*
+  Reduced-motion plumbing (quality floor, non-negotiable).
+  JS reads useReducedMotion(); this is the CSS backstop so anything
+  animated purely in CSS also collapses to a static end-state.
+*/
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
