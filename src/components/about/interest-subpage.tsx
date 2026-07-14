@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 /*
@@ -52,12 +52,32 @@ export function InterestSubpage({
  * Honest static state for a module whose live data lands in Phase 6. Reads as a
  * deliberate placeholder, never a broken/empty state (the quality-floor rule).
  */
-export function ComingLive({ note }: { note: string }) {
+export function ComingLive({
+  note,
+  link,
+}: {
+  note: string;
+  link?: { href: string; label: string };
+}) {
   return (
     <div className="frost rounded-xl border border-dashed border-border bg-bg-1/70 px-6 py-16 text-center">
       <p className="measure mx-auto text-small leading-relaxed text-text-mid">
         {note}
       </p>
+      {link && (
+        <a
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+          className="group mt-6 inline-flex items-center gap-1.5 font-mono text-mono uppercase tracking-wider text-accent underline-offset-4 hover:underline"
+        >
+          {link.label}
+          <ArrowUpRight
+            className="size-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
+            aria-hidden="true"
+          />
+        </a>
+      )}
     </div>
   );
 }

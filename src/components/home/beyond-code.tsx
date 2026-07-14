@@ -11,10 +11,11 @@ import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
  *   - Chess: 1177 chess.com rapid + ~1300 FIDE are Vaibhav's real, confirmed
  *     numbers (static, not a live feed — so no "Live" pill). The sparkline is
  *     decorative and drawn to read as "hovering", not a real rating history.
- *   - Film: no fabricated Letterboxd handle; posters are abstract placeholders.
+ *   - Film: @vaibzz is his real handle (links out on /about/movies); the posters
+ *     stay abstract placeholders until the live Letterboxd feed is wired.
  *   - Kitchen: an explicit empty photo slot until Vaibhav supplies a real image.
- *   - Debate: "#19 in the country" only (confirmed); the mock's "#3 at Berkeley"
- *     is dropped as unverified.
+ *   - Debate: #19 in the country and #3 at the Berkeley Invitational (Varsity PF)
+ *     are both confirmed real.
  * Real routes are preserved (/about/*), not the mock's #anchors.
  */
 
@@ -89,10 +90,7 @@ function FilmCard() {
       <CloudSkin />
       <div className="flex items-center justify-between">
         <span className={labelCls}>Film</span>
-        <ArrowUpRight
-          className="size-4 text-text-lo transition-colors group-hover:text-accent"
-          aria-hidden="true"
-        />
+        <span className={metaCls}>@vaibzz</span>
       </div>
       <div>
         <div className="mb-4 flex items-center justify-center gap-2">
@@ -157,9 +155,15 @@ function DebateCard() {
         <span className={metaCls}>National circuit</span>
       </div>
       <div>
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-1.5">
           <span className="font-serif text-[3rem] leading-[0.9] text-text-hi">#19</span>
           <span className={metaCls}>in the country</span>
+          <span
+            className="font-mono text-[0.6rem] uppercase tracking-[0.06em]"
+            style={{ color: "#8a6410" }}
+          >
+            #3 · Berkeley Invitational (Varsity PF)
+          </span>
         </div>
         <p className={`${lineCls} mt-3.5`}>Ranked #19 in the country, once upon a time.</p>
       </div>
