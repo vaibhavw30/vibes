@@ -44,13 +44,19 @@ export default function RootLayout({
          * The painting — a fixed, faded, site-wide background (the "Daydream sky"
          * theme). Sits above the body's sky-gradient base and below all content;
          * frosted panels blur it behind cards. Opacity is the single tuning knob.
+         * Calmed to 0.20 (was 0.45): because it's `fixed`+`bg-cover`, scrolled
+         * content always sits over the painting's busy horizon band — at 0.45 the
+         * park detail fought text everywhere, worst on the prose pages (about/now/
+         * project detail) which have no frosted backing. The hero keeps its own
+         * vivid 0.55 layer for the "wow", so this only calms the content backdrop;
+         * home's frost cards still read fine. Tunable — 0.28ish for more presence.
          * ASSET: save the Higgsfield oil painting to `public/hero-park.jpg`; until
          * then the body sky-gradient shows through as a graceful fallback.
          */}
         <div
           aria-hidden="true"
           className="pointer-events-none fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.45 }}
+          style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.2 }}
         />
         <a
           href="#main"

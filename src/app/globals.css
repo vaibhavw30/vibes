@@ -183,6 +183,83 @@
 }
 
 /*
+  Project-card data-viz "draw-in": the stroke traces itself once on mount.
+  Under reduced motion the global backstop below collapses the animation to
+  ~0ms with fill:forwards, so the path lands fully drawn (offset 0) instantly.
+*/
+@keyframes vizDrawIn {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.viz-draw {
+  stroke-dasharray: 460;
+  stroke-dashoffset: 460;
+  animation: vizDrawIn 1.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/*
+  "Beyond code" cloud-shaped cards. Each card is masked into a fluffy cloud
+  silhouette — an accent-tinted edge (drop-shadow) behind a frosted white fill —
+  so the section literally reads as clouds in the daydream sky. The `--cloud`
+  mask is set per variant class (not :nth-of-type, since the reveal wrappers
+  break sibling order). Content sits above the skin at z-index 1.
+*/
+.cloud-card {
+  position: relative;
+  overflow: visible;
+  padding: 4.2rem 3rem 3.6rem;
+  text-align: center;
+}
+.cloud-card > *:not(.cloud-skin) {
+  position: relative;
+  z-index: 1;
+}
+.cloud-skin {
+  position: absolute;
+  inset: -4px;
+  z-index: 0;
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cloud-card:hover .cloud-skin {
+  transform: translateY(-4px);
+}
+.cloud-edge {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  -webkit-mask: var(--cloud) center / 100% 100% no-repeat;
+  mask: var(--cloud) center / 100% 100% no-repeat;
+  filter: drop-shadow(0 16px 22px rgba(42, 103, 166, 0.24));
+}
+.cloud-fill {
+  position: absolute;
+  inset: 3px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(247, 251, 254, 0.84)
+  );
+  backdrop-filter: blur(18px) saturate(128%);
+  -webkit-backdrop-filter: blur(18px) saturate(128%);
+  -webkit-mask: var(--cloud) center / 100% 100% no-repeat;
+  mask: var(--cloud) center / 100% 100% no-repeat;
+}
+.cloud-a {
+  --cloud: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20300'%20preserveAspectRatio='none'%3E%3Cg%20fill='%23fff'%3E%3Crect%20x='40'%20y='92'%20width='280'%20height='152'%20rx='60'/%3E%3Ccircle%20cx='100'%20cy='86'%20r='54'/%3E%3Ccircle%20cx='184'%20cy='62'%20r='60'/%3E%3Ccircle%20cx='268'%20cy='86'%20r='54'/%3E%3Ccircle%20cx='46'%20cy='148'%20r='46'/%3E%3Ccircle%20cx='316'%20cy='150'%20r='44'/%3E%3Ccircle%20cx='108'%20cy='246'%20r='52'/%3E%3Ccircle%20cx='200'%20cy='248'%20r='50'/%3E%3Ccircle%20cx='292'%20cy='244'%20r='46'/%3E%3C/g%3E%3C/svg%3E");
+}
+.cloud-b {
+  --cloud: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20300'%20preserveAspectRatio='none'%3E%3Cg%20fill='%23fff'%3E%3Crect%20x='38'%20y='92'%20width='284'%20height='152'%20rx='56'/%3E%3Ccircle%20cx='92'%20cy='84'%20r='50'/%3E%3Ccircle%20cx='176'%20cy='64'%20r='58'/%3E%3Ccircle%20cx='264'%20cy='80'%20r='56'/%3E%3Ccircle%20cx='44'%20cy='148'%20r='44'/%3E%3Ccircle%20cx='316'%20cy='146'%20r='44'/%3E%3Ccircle%20cx='110'%20cy='246'%20r='52'/%3E%3Ccircle%20cx='206'%20cy='248'%20r='50'/%3E%3Ccircle%20cx='296'%20cy='244'%20r='44'/%3E%3C/g%3E%3C/svg%3E");
+}
+.cloud-c {
+  --cloud: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20300'%20preserveAspectRatio='none'%3E%3Cg%20fill='%23fff'%3E%3Crect%20x='42'%20y='96'%20width='276'%20height='150'%20rx='60'/%3E%3Ccircle%20cx='112'%20cy='82'%20r='58'/%3E%3Ccircle%20cx='198'%20cy='62'%20r='60'/%3E%3Ccircle%20cx='284'%20cy='100'%20r='52'/%3E%3Ccircle%20cx='52'%20cy='156'%20r='44'/%3E%3Ccircle%20cx='314'%20cy='146'%20r='44'/%3E%3Ccircle%20cx='100'%20cy='246'%20r='48'/%3E%3Ccircle%20cx='196'%20cy='248'%20r='50'/%3E%3Ccircle%20cx='290'%20cy='242'%20r='46'/%3E%3C/g%3E%3C/svg%3E");
+}
+.cloud-d {
+  --cloud: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20300'%20preserveAspectRatio='none'%3E%3Cg%20fill='%23fff'%3E%3Crect%20x='44'%20y='94'%20width='272'%20height='152'%20rx='64'/%3E%3Ccircle%20cx='100'%20cy='90'%20r='54'/%3E%3Ccircle%20cx='186'%20cy='64'%20r='60'/%3E%3Ccircle%20cx='276'%20cy='92'%20r='54'/%3E%3Ccircle%20cx='50'%20cy='150'%20r='48'/%3E%3Ccircle%20cx='316'%20cy='152'%20r='44'/%3E%3Ccircle%20cx='114'%20cy='246'%20r='48'/%3E%3Ccircle%20cx='200'%20cy='248'%20r='50'/%3E%3Ccircle%20cx='288'%20cy='242'%20r='46'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/*
   Reduced-motion plumbing (quality floor, non-negotiable).
   JS reads useReducedMotion(); this is the CSS backstop so anything
   animated purely in CSS also collapses to a static end-state.

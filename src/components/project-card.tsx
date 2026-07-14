@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Lock } from "lucide-react";
 import type { Project } from "@/content/schema";
 import { DomainPill, TypePill } from "@/components/tag-pill";
+import { ProjectViz, VIZ_SLUGS } from "@/components/home/project-viz";
 
 /*
  * Reusable project card (home teaser + Phase 3 grid). Serif title, italic/muted
@@ -14,6 +15,7 @@ import { DomainPill, TypePill } from "@/components/tag-pill";
 export function ProjectCard({ project }: { project: Project }) {
   const comingSoon = project.status === "coming-soon";
   const isDraft = project.whyStatus === "draft";
+  const hasViz = VIZ_SLUGS.has(project.slug);
 
   return (
     <Link
@@ -41,7 +43,11 @@ export function ProjectCard({ project }: { project: Project }) {
         {project.whyShort}
       </p>
 
-      <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-5">
+      {hasViz && <ProjectViz slug={project.slug} />}
+
+      <div
+        className={`flex flex-wrap items-center gap-1.5 pt-5 ${hasViz ? "" : "mt-auto"}`}
+      >
         {project.domainTags.map((tag) => (
           <DomainPill key={tag} tag={tag} />
         ))}

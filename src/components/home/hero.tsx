@@ -1,27 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { heroHeadline, heroRoles, heroSublinePrefix } from "@/content/site";
+import { PaperPlane } from "@/components/home/paper-plane";
 
 /*
- * Home hero — "Daydream sky". The Higgsfield oil painting is a fixed, faded,
- * site-wide background (layout.tsx); the hero just lays a soft light scrim behind
- * the headline for legibility. The ink headline is the LCP element (plain text,
- * never gated on the image). The sub-line's final word cycles through heroRoles on
- * a masked vertical slide (transform + opacity).
+ * Home hero — "Daydream sky" (Home - Polished). The site-wide fixed painting
+ * (layout.tsx, faded to 0.45 for content legibility) is re-layered here at 0.55
+ * with a bottom mask fade + cursor parallax so the hero reads vivid. The ink
+ * headline is the LCP element (plain text, never gated on the image). The sub-line's
+ * final word cycles through heroRoles on a masked vertical slide.
  *
- * NOTE (pending Vaibhav / Claude Design): the LiquidityField signature moment was
- * removed from the hero — particles clash with the painting. The component is kept
- * at ./liquidity-field.tsx (and documented in DESIGN_HANDOFF §9) for reuse. The
- * "one interactive moment" question is open (e.g. a subtle parallax on the fixed
- * painting, or a sky-only field).
+ * Signature interactive moment: <PaperPlane> — a cursor-following paper airplane
+ * (spring physics, static frame under reduced motion). It supersedes the removed
+ * LiquidityField in the hero; the field component is kept at ./liquidity-field.tsx.
  */
 const CYCLE_MS = 2400;
 
 export function Hero() {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
+  const heroRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (reduce) return;
@@ -35,14 +36,24 @@ export function Hero() {
   const role = reduce ? heroRoles[0] : heroRoles[index];
 
   return (
-    <section className="relative flex min-h-[88svh] w-full items-center overflow-hidden">
-      {/* The site-wide fixed painting (layout.tsx) is faded to 0.4 so body text on
-          content pages stays AA-legible. The hero wants it vivid, so we layer a
-          second, more-opaque copy of the painting just here. */}
+    <section
+      ref={heroRef}
+      className="relative flex min-h-[88svh] w-full items-center overflow-hidden"
+    >
+      {/* Vivid hero copy of the painting: scaled for parallax headroom, faded out
+          toward the bottom so it hands off to the site-wide background. */}
       <div
+        ref={bgRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-park.jpg')", opacity: 0.55 }}
+        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat [transition:transform_.18s_ease-out] [will-change:transform]"
+        style={{
+          backgroundImage: "url('/hero-park.jpg')",
+          opacity: 0.55,
+          transform: "scale(1.06)",
+          WebkitMaskImage:
+            "linear-gradient(180deg,#000 0%,#000 62%,transparent 100%)",
+          maskImage: "linear-gradient(180deg,#000 0%,#000 62%,transparent 100%)",
+        }}
       />
       {/* Soft, left-weighted light scrim behind the headline for legibility. */}
       <div
@@ -50,9 +61,11 @@ export function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "linear-gradient(100deg, rgba(247,250,252,0.72) 0%, rgba(247,250,252,0.4) 32%, rgba(247,250,252,0.08) 58%, rgba(247,250,252,0) 76%)",
+            "linear-gradient(100deg, rgba(247,250,252,0.74) 0%, rgba(247,250,252,0.42) 32%, rgba(247,250,252,0.08) 58%, rgba(247,250,252,0) 76%)",
         }}
       />
+
+      <PaperPlane containerRef={heroRef} bgRef={bgRef} />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-28 pb-20">
         <motion.p
@@ -99,6 +112,17 @@ export function Hero() {
             )}
           </span>
         </motion.p>
+
+        {!reduce && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.72 }}
+            transition={{ duration: 0.6, delay: 1.1 }}
+            className="mt-10 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-text-lo"
+          >
+            ↳ it follows you
+          </motion.p>
+        )}
       </div>
     </section>
   );
