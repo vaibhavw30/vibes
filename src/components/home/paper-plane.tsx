@@ -26,6 +26,7 @@ export function PaperPlane({
   useEffect(() => {
     const plane = planeRef.current;
     const hero = containerRef.current;
+    const bgAtMount = bgRef.current;
     if (!plane || !hero) return;
 
     // Reduced motion: a single static resting frame, no loop, no listeners.
@@ -91,8 +92,7 @@ export function PaperPlane({
     return () => {
       cancelAnimationFrame(raf);
       hero.removeEventListener("pointermove", onMove);
-      const bg = bgRef.current;
-      if (bg) bg.style.transform = "scale(1.06)";
+      if (bgAtMount) bgAtMount.style.transform = "scale(1.06)";
     };
   }, [reduce, containerRef, bgRef]);
 

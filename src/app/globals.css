@@ -183,6 +183,22 @@
 }
 
 /*
+  Project-card data-viz "draw-in": the stroke traces itself once on mount.
+  Under reduced motion the global backstop below collapses the animation to
+  ~0ms with fill:forwards, so the path lands fully drawn (offset 0) instantly.
+*/
+@keyframes vizDrawIn {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.viz-draw {
+  stroke-dasharray: 460;
+  stroke-dashoffset: 460;
+  animation: vizDrawIn 1.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/*
   Reduced-motion plumbing (quality floor, non-negotiable).
   JS reads useReducedMotion(); this is the CSS backstop so anything
   animated purely in CSS also collapses to a static end-state.
