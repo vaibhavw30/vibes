@@ -100,23 +100,27 @@ export function ExperienceStrip() {
       <Reveal>
         <SectionHeading eyebrow="Experience" title="Where I've been putting the work." />
       </Reveal>
-      <div className="relative mt-12">
-        {/* The rail: centered on the 46px avatars (left 23px), fading downward. */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-4 left-[23px] top-4 w-0.5"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(42,103,166,.28), rgba(42,103,166,.08))",
-          }}
-        />
-        <RevealStagger>
-          {experience.map((role) => (
-            <RevealItem key={role.org}>
-              <TimelineRow role={role} />
-            </RevealItem>
-          ))}
-        </RevealStagger>
+      {/* Grounded on a frost panel so the timeline reads over the busy painting
+          and matches the "surfaces float over sky" language of the other sections. */}
+      <div className="frost mt-12 rounded-2xl border border-border/70 p-5 sm:p-8">
+        <div className="relative">
+          {/* The rail: centered on the 46px avatars (left 23px), fading downward. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-4 left-[23px] top-4 w-0.5"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(42,103,166,.28), rgba(42,103,166,.08))",
+            }}
+          />
+          <RevealStagger>
+            {experience.map((role) => (
+              <RevealItem key={role.org}>
+                <TimelineRow role={role} />
+              </RevealItem>
+            ))}
+          </RevealStagger>
+        </div>
       </div>
     </section>
   );

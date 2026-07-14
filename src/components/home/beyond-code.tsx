@@ -8,9 +8,9 @@ import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
  * person, each masked into a fluffy cloud (see .cloud-* in globals.css). Every
  * line is a real fact; nothing here is invented. Deliberately HONEST placeholders
  * where the design mock guessed specifics we can't yet verify:
- *   - Chess: shows "~1300" (his stated ballpark), NOT a fake precise/"live"
- *     rating — there's no live chess.com feed wired. The sparkline is decorative
- *     and drawn to read as "hovering", matching the copy, not a real history.
+ *   - Chess: 1177 chess.com rapid + ~1300 FIDE are Vaibhav's real, confirmed
+ *     numbers (static, not a live feed — so no "Live" pill). The sparkline is
+ *     decorative and drawn to read as "hovering", not a real rating history.
  *   - Film: no fabricated Letterboxd handle; posters are abstract placeholders.
  *   - Kitchen: an explicit empty photo slot until Vaibhav supplies a real image.
  *   - Debate: "#19 in the country" only (confirmed); the mock's "#3 at Berkeley"
@@ -49,8 +49,9 @@ function ChessCard() {
       <div>
         <div className="flex items-baseline justify-center gap-2">
           <span className="font-serif text-[2rem] leading-none text-text-hi">
-            ~1300
+            1177
           </span>
+          <span className={metaCls}>FIDE ~1300</span>
         </div>
         <svg
           viewBox="0 0 140 44"
