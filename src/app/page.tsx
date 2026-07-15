@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero";
+import { LastWatched } from "@/components/home/last-watched";
 import { SelectedWork } from "@/components/home/selected-work";
 import { ExperienceStrip } from "@/components/home/experience-strip";
 import { BeyondCode } from "@/components/home/beyond-code";
@@ -11,7 +12,7 @@ import { BeyondCode } from "@/components/home/beyond-code";
 export default function HomePage() {
   return (
     <main>
-      <Hero />
+      <Hero breadcrumb={<LastWatched />} />
       <SelectedWork />
       <ExperienceStrip />
       <BeyondCode />

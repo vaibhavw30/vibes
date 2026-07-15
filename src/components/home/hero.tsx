@@ -18,7 +18,7 @@ import { PaperPlane } from "@/components/home/paper-plane";
  */
 const CYCLE_MS = 2400;
 
-export function Hero() {
+export function Hero({ breadcrumb }: { breadcrumb?: React.ReactNode }) {
   const reduce = useReducedMotion();
   const [index, setIndex] = useState(0);
   const heroRef = useRef<HTMLElement>(null);
@@ -112,6 +112,16 @@ export function Hero() {
             )}
           </span>
         </motion.p>
+
+        {breadcrumb && (
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
+          >
+            {breadcrumb}
+          </motion.div>
+        )}
 
         {!reduce && (
           <motion.p
