@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { NowPlayingLine } from "@/components/now/now-playing";
+import { StayingActiveLine } from "@/components/live/staying-active-line";
 import { getNowPlaying } from "@/lib/spotify";
 import { getChessProfile } from "@/lib/chess";
+import { getStravaWeek } from "@/lib/strava";
 
 export const metadata: Metadata = {
   title: "Now",
@@ -21,9 +23,13 @@ const RESULT_WORD = { W: "won", L: "lost", D: "drew" } as const;
  * marked below — edit the words and fill the TODOs before this ships.
  */
 export default async function NowPage() {
-  const [np, chess] = await Promise.all([getNowPlaying(), getChessProfile(1)]);
+  const [np, chess, week] = await Promise.all([
+    getNowPlaying(),
+    getChessProfile(1),
+    getStravaWeek(),
+  ]);
   const lastGame = chess.recentGames[0];
-  const isSnapshot = !np.live || !chess.live;
+  const isSnapshot = !np.live || !chess.live || !week.live;
 
   return (
     <main className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
@@ -75,6 +81,8 @@ export default async function NowPage() {
                 </a>
               </p>
             )}
+
+            <StayingActiveLine week={week} />
           </div>
 
           {isSnapshot && (
@@ -102,10 +110,8 @@ export default async function NowPage() {
               <Todo>confirm timing and how you want each phrased.</Todo>
             </FocusRow>
             <FocusRow label="Right now">
-              <Todo>
-                what you&rsquo;re actually spending this stretch on — an
-                internship, a project, a class? I won&rsquo;t guess; fill this in.
-              </Todo>
+              Interning at DataMorph for the summer. My run as founding engineer
+              at OddsAreOn wrapped up in May.
             </FocusRow>
             <FocusRow label="Off-screen">
               Chess (stuck around 1300 and stubborn about it), cooking out of the

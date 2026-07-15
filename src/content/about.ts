@@ -77,6 +77,13 @@ export const interests: Interest[] = [
     href: null,
   },
   {
+    slug: "training",
+    label: "Staying active",
+    blurb: "Trying to turn the gym into a habit that sticks. I log it to stay honest.",
+    href: "/about/training",
+    live: true,
+  },
+  {
     slug: "basketball",
     label: "Basketball",
     blurb: "Pickup whenever I can find a run.",
