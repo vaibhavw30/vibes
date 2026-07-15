@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { aboutBody, aboutLead, aboutThroughLine, interests } from "@/content/about";
-import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
+import { Reveal } from "@/components/reveal";
+import { InterestBoard } from "@/components/about/interest-board";
 
 export const metadata: Metadata = {
   title: "About",
@@ -65,54 +64,10 @@ export default function AboutPage() {
           </h2>
         </Reveal>
 
-        <RevealStagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {interests.map((interest) => (
-            <RevealItem key={interest.slug} className="h-full">
-              <InterestTile interest={interest} />
-            </RevealItem>
-          ))}
-        </RevealStagger>
+        <div className="mt-10">
+          <InterestBoard interests={interests} />
+        </div>
       </section>
     </main>
-  );
-}
-
-function InterestTile({ interest }: { interest: (typeof interests)[number] }) {
-  const body = (
-    <>
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-mono uppercase tracking-wider text-text-lo">
-          {interest.label}
-        </span>
-        {interest.href && (
-          <ArrowUpRight
-            className="size-4 text-text-lo transition-colors group-hover:text-accent"
-            aria-hidden="true"
-          />
-        )}
-      </div>
-      <p className="mt-6 text-small leading-relaxed text-text-mid">
-        {interest.blurb}
-      </p>
-    </>
-  );
-
-  // Full-subpage interests link out; inline ones are a static tile (no hover lift,
-  // no affordance that implies a link that isn't there).
-  if (interest.href) {
-    return (
-      <Link
-        href={interest.href}
-        className="frost group flex h-full flex-col justify-between rounded-xl border border-border bg-bg-1 p-5 transition duration-200 ease-out hover:-translate-y-1 hover:border-border-strong hover:bg-bg-2 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
-      >
-        {body}
-      </Link>
-    );
-  }
-
-  return (
-    <div className="frost flex h-full flex-col justify-between rounded-xl border border-border bg-bg-1/70 p-5">
-      {body}
-    </div>
   );
 }
