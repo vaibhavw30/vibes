@@ -4,7 +4,7 @@ import { StayingActiveLine } from "@/components/live/staying-active-line";
 import { SelectedWork } from "@/components/home/selected-work";
 import { ExperienceStrip } from "@/components/home/experience-strip";
 import { BeyondCode } from "@/components/home/beyond-code";
-import { getStravaWeek } from "@/lib/strava";
+import { getActivityWeek } from "@/lib/activity";
 
 /*
  * Home — the scrolling narrative (Phase 2). Static content only; the signature
@@ -13,7 +13,7 @@ import { getStravaWeek } from "@/lib/strava";
  * Two live breadcrumbs stack in the hero: last film watched + this week's activity.
  */
 export default async function HomePage() {
-  const week = await getStravaWeek();
+  const week = await getActivityWeek();
   return (
     <main>
       <Hero

@@ -1,8 +1,12 @@
-import { formatDuration, type StravaActivity, type StravaWeek } from "@/lib/strava";
+import {
+  formatDuration,
+  type ActivitySession,
+  type ActivityWeek,
+} from "@/lib/activity";
 
 /*
  * Presentational panel for /about/training. Server component (pure render of a
- * StravaWeek). This-week stat cards on top, a recent-sessions list below. Frames
+ * ActivityWeek). This-week stat cards on top, a recent-sessions list below. Frames
  * around SESSIONS + active time (lifting has no distance); the distance card and
  * per-row distance appear only when there's a distance sport in the mix. A quiet
  * week gets an honest, deliberate empty state — never a broken panel. No motion of
@@ -24,14 +28,16 @@ function StatCard({ label, value }: { label: string; value: string }) {
   );
 }
 
-/** Human label for Strava's sport_type enum (e.g. "WeightTraining" → "Lift"). */
+/** Human label for a provider's activity type (e.g. "Weights" → "Lift"). */
 function sportLabel(type: string): string {
-  if (type === "WeightTraining" || type === "Workout") return "Lift";
+  if (type === "Weights" || type === "WeightTraining" || type === "Workout") {
+    return "Lift";
+  }
   // CamelCase → spaced ("TrailRun" → "Trail Run"), else pass through ("Run").
   return type.replace(/([a-z])([A-Z])/g, "$1 $2");
 }
 
-function SessionRow({ activity }: { activity: StravaActivity }) {
+function SessionRow({ activity }: { activity: ActivitySession }) {
   const day = activity.date
     ? new Date(activity.date).toLocaleDateString("en-US", {
         weekday: "short",
@@ -70,19 +76,19 @@ export function StayingActivePanel({
   distanceKm,
   activities,
   live,
-}: StravaWeek) {
+}: ActivityWeek) {
   return (
     <div>
       {!live && (
         <p className="mb-6 font-mono text-mono uppercase tracking-wider text-text-lo">
           Showing a recent snapshot ·{" "}
           <a
-            href="https://www.strava.com"
+            href="https://www.fitbit.com/activities"
             target="_blank"
             rel="noreferrer"
             className="text-accent underline-offset-4 hover:underline"
           >
-            logged on Strava
+            logged on Fitbit
           </a>
         </p>
       )}
@@ -115,7 +121,7 @@ export function StayingActivePanel({
           <div className="mt-12">
             <h2 className="font-mono text-mono uppercase tracking-widest text-text-lo">
               This week{" "}
-              <span style={{ color: ACCENT }}>· logged on Strava</span>
+              <span style={{ color: ACCENT }}>· logged on Fitbit</span>
             </h2>
             <ul className="mt-2 divide-y divide-border">
               {activities.map((a) => (

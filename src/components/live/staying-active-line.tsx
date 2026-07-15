@@ -1,13 +1,13 @@
-import { formatDuration, type StravaWeek } from "@/lib/strava";
+import { formatDuration, type ActivityWeek } from "@/lib/activity";
 
 /*
  * Shared "Staying active" breadcrumb line, reused on /now and the home hero.
- * Server component, pure render of a StravaWeek. Mono line in the "last watched"
+ * Server component, pure render of an ActivityWeek. Mono line in the "last watched"
  * idiom. Lifting has no distance, so the unit is sessions + active time; distance
  * is appended only when a distance sport is in the mix. A quiet week (nothing
  * logged) renders as a calm plain-text line, never "0 km" or an empty gap.
  */
-export function StayingActiveLine({ week }: { week: StravaWeek }) {
+export function StayingActiveLine({ week }: { week: ActivityWeek }) {
   const { activityCount, movingTimeMin, distanceKm, activities } = week;
 
   if (activityCount === 0) {
@@ -20,7 +20,7 @@ export function StayingActiveLine({ week }: { week: StravaWeek }) {
   }
 
   const noun = activityCount === 1 ? "session" : "sessions";
-  const href = activities[0]?.url ?? "https://www.strava.com";
+  const href = activities[0]?.url ?? "https://www.fitbit.com/activities";
 
   return (
     <p className="font-mono text-mono uppercase tracking-widest text-text-lo">

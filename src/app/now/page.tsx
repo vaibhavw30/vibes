@@ -4,7 +4,7 @@ import { NowPlayingLine } from "@/components/now/now-playing";
 import { StayingActiveLine } from "@/components/live/staying-active-line";
 import { getNowPlaying } from "@/lib/spotify";
 import { getChessProfile } from "@/lib/chess";
-import { getStravaWeek } from "@/lib/strava";
+import { getActivityWeek } from "@/lib/activity";
 
 export const metadata: Metadata = {
   title: "Now",
@@ -26,7 +26,7 @@ export default async function NowPage() {
   const [np, chess, week] = await Promise.all([
     getNowPlaying(),
     getChessProfile(1),
-    getStravaWeek(),
+    getActivityWeek(),
   ]);
   const lastGame = chess.recentGames[0];
   const isSnapshot = !np.live || !chess.live || !week.live;
