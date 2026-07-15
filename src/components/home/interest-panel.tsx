@@ -15,8 +15,9 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
  * autoplay and the slide, leaving an instant, tab-driven panel.
  *
  * Content honesty: every value is a real, confirmed fact —
- *   Chess:   1177 chess.com rapid + ~1300 FIDE (static; the sparkline is
- *            DECORATIVE, a "hovering" trace, not a real rating history).
+ *   Chess:   1421 peak blitz on chess.com (static; blitz is the main format —
+ *            live current rating + recent games live on /about/chess. The
+ *            sparkline is DECORATIVE, a "hovering" trace, not a rating history).
  *   Film:    @vaibzz on Letterboxd.
  *   Kitchen: an explicit "Photo coming soon" slot until a real image is supplied.
  *   Debate:  #19 in the country and #3 at the Berkeley Invitational (Varsity PF).
@@ -161,8 +162,8 @@ function ChessBody() {
   return (
     <>
       <div className="flex items-baseline gap-2">
-        <span className="font-serif text-[2rem] leading-none text-text-hi">1177</span>
-        <span className={metaCls}>FIDE ~1300</span>
+        <span className="font-serif text-[2rem] leading-none text-text-hi">1421</span>
+        <span className={metaCls}>peak blitz</span>
       </div>
       {/* Decorative "hovering" trace — oscillates around a level, not a climb. */}
       <svg
@@ -233,7 +234,7 @@ const INTERESTS: Interest[] = [
     id: "chess",
     tab: "Chess",
     label: "Chess",
-    meta: "chess.com · rapid",
+    meta: "chess.com · blitz",
     href: "/about/chess",
     theme: { accent: "#2f7d54", tint: "rgba(47,125,84,0.12)", wash: "rgba(47,125,84,0.07)" },
     Illustration: RookIcon,
