@@ -81,7 +81,10 @@ async function getAccessToken(): Promise<string> {
       grant_type: "refresh_token",
       refresh_token: REFRESH_TOKEN as string,
     }),
-    next: { revalidate: 30 },
+    // Never cache the token exchange: access tokens are short-lived, and a cached
+    // (stale/expired) token — the Data Cache persists across restarts — causes 401s
+    // downstream. The GET calls below carry the ISR window instead.
+    cache: "no-store",
   });
   if (!res.ok) throw new Error(`Spotify token HTTP ${res.status}`);
   const json = (await res.json()) as { access_token?: string };
