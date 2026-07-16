@@ -23,7 +23,7 @@ export const heroSublinePrefix = "Georgia Tech CS student interested in";
 /** Conversion links (GitHub + LinkedIn ONLY — hard constraint). */
 export const social = {
   github: "https://github.com/vaibhavw30",
-  linkedin: "TODO(vaibhav): LinkedIn URL",
+  linkedin: "https://www.linkedin.com/in/vaibhavwudaru/",
 } as const;
 
 /**
