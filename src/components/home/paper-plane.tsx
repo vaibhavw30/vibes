@@ -8,7 +8,7 @@ import { useReducedMotion } from "motion/react";
  * after the cursor — on-concept for "the things I imagined as a kid" / flight /
  * daydreaming. It arrives with a fly-in from the left, trails the cursor a beat
  * behind on a spring, banks its nose along its velocity, bobs gently, and drifts in
- * a lazy figure-8 when the cursor is still. It follows the cursor across the WHOLE
+ * a faint hover when the cursor is still. It follows the cursor across the WHOLE
  * home page (position:fixed + a window-level listener), not just the hero; it also
  * rides a subtle parallax on the hero painting, but only while the cursor is over
  * it. z-[9] keeps it behind the hero headline (z-10) yet above every scrolled
@@ -75,8 +75,11 @@ export function PaperPlane({
       const t = (now - t0) / 1000;
       if (!arrived && t > 0.05) plane.style.opacity = "1";
       idle += 0.016;
-      const driftX = arrived ? Math.sin(idle * 0.6) * 26 : 0;
-      const driftY = arrived ? Math.sin(idle * 1.2) * 14 : 0;
+      // Idle life-sign only — a faint hover centered on the cursor. Kept small so
+      // a parked cursor (reading a scrolled section) never reads as the plane
+      // "wandering off"; while the cursor moves, idle≈0 so drift≈0 and it hugs.
+      const driftX = arrived ? Math.sin(idle * 0.5) * 9 : 0;
+      const driftY = arrived ? Math.sin(idle * 0.9) * 6 : 0;
       const gx = tx + driftX;
       const gy = ty + driftY;
       // spring toward target, trailing a beat behind

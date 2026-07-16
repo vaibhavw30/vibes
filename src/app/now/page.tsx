@@ -20,9 +20,6 @@ export const metadata: Metadata = {
  * one roomy card each) sits above a short hand-written focus section. Server
  * component — every feed fails gracefully to an honest snapshot, so the page is
  * never broken/empty.
- *
- * TODO(vaibhav): the focus section is drafted from confirmed facts with blanks
- * marked below — edit the words and fill the TODOs before this ships.
  */
 export default async function NowPage() {
   const [np, chess, week] = await Promise.all([
@@ -84,8 +81,7 @@ export default async function NowPage() {
             </FocusRow>
             <FocusRow label="Next">
               Heading into research at Georgia Tech&rsquo;s EPIC lab and a quant
-              seat at GTSF.{" "}
-              <Todo>confirm timing and how you want each phrased.</Todo>
+              seat at GTSF this fall.
             </FocusRow>
             <FocusRow label="Right now">
               Interning at DataMorph for the summer. My run as founding engineer
@@ -93,8 +89,7 @@ export default async function NowPage() {
             </FocusRow>
             <FocusRow label="Off-screen">
               Chess (stuck around 1300 and stubborn about it), cooking out of the
-              garden, and piano.{" "}
-              <Todo>trim to what&rsquo;s actually true this month.</Todo>
+              garden, and piano.
             </FocusRow>
           </dl>
         </section>
@@ -117,18 +112,5 @@ function FocusRow({
       </dt>
       <dd className="text-body leading-relaxed text-text-mid">{children}</dd>
     </div>
-  );
-}
-
-/** Visible draft marker — a clearly-flagged blank for Vaibhav to fill, never a
- *  fabricated fact. Intentionally conspicuous so it can't ship unnoticed. */
-function Todo({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="rounded border border-dashed px-1.5 py-0.5 font-mono text-[0.7rem] uppercase tracking-wider"
-      style={{ color: "#8a6410", borderColor: "#8a641055" }}
-    >
-      TODO(vaibhav): {children}
-    </span>
   );
 }
