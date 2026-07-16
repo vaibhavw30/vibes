@@ -1,10 +1,10 @@
 /*
  * Provider-agnostic "staying active" layer. The UI (StayingActiveLine, the
  * /about/training panel, the home + /now surfaces) depends ONLY on this file's
- * shape — never on a specific provider. Today the provider is Fitbit (src/lib/
- * fitbit.ts); when the Fitbit Web API is deprecated (Sept 2026) the pivot to the
- * Google Health API is a one-file swap: implement getActivityWeek there and
- * re-export it below. Everything downstream stays put.
+ * shape — never on a specific provider. The provider is the Google Health API
+ * (src/lib/google-health.ts), which replaced Fitbit (new-app registration closed
+ * July 2026). Swapping providers is a one-file change: implement getActivityWeek
+ * elsewhere and re-export it below. Everything downstream stays put.
  */
 
 export type ActivitySession = {
@@ -12,7 +12,10 @@ export type ActivitySession = {
   type: string; // "Weights" | "Run" | "Walk" | ... (provider's label)
   distanceKm: number; // 0 for non-distance sessions (e.g. lifting)
   movingTimeMin: number;
-  date: string; // ISO start time
+  date: string; // ISO start time — the true UTC instant (sort/window on this)
+  utcOffsetMin: number; // minutes to add to UTC for the session's LOCAL wall clock
+  // (e.g. -420 for PDT). Display the day in local time so a late-evening workout
+  // never reads a day late on a UTC server (Vercel). 0 = treat date as-is.
   url: string; // link back to the provider
 };
 
@@ -25,7 +28,7 @@ export type ActivityWeek = {
 };
 
 /** The current provider. Swap this line to change data sources. */
-export { getFitbitWeek as getActivityWeek } from "./fitbit";
+export { getGoogleHealthWeek as getActivityWeek } from "./google-health";
 
 /** Shared formatter: minutes → "3h 20m" / "45m" / "0m". */
 export function formatDuration(min: number): string {
