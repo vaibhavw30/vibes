@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
-import { NowPlayingLine } from "@/components/now/now-playing";
-import { StayingActiveLine } from "@/components/live/staying-active-line";
+import {
+  SpotifyCard,
+  ChessCard,
+  TrainingCard,
+} from "@/components/now/live-cards";
 import { getNowPlaying } from "@/lib/spotify";
 import { getChessProfile } from "@/lib/chess";
 import { getActivityWeek } from "@/lib/activity";
@@ -11,13 +14,12 @@ export const metadata: Metadata = {
   description: "What Vaibhav is building, reading, and thinking about right now.",
 };
 
-const RESULT_WORD = { W: "won", L: "lost", D: "drew" } as const;
-
 /*
  * The "now page" (nownownow.com convention): a living, low-maintenance snapshot of
- * what I'm on right now. A small live strip (Spotify listening + Chess) sits above
- * a short hand-written focus section. Server component — both feeds fail gracefully
- * to an honest snapshot, so the page is never broken/empty.
+ * what I'm on right now. A themed live strip (Spotify + Chess + Staying active,
+ * one roomy card each) sits above a short hand-written focus section. Server
+ * component — every feed fails gracefully to an honest snapshot, so the page is
+ * never broken/empty.
  *
  * TODO(vaibhav): the focus section is drafted from confirmed facts with blanks
  * marked below — edit the words and fill the TODOs before this ships.
@@ -25,10 +27,9 @@ const RESULT_WORD = { W: "won", L: "lost", D: "drew" } as const;
 export default async function NowPage() {
   const [np, chess, week] = await Promise.all([
     getNowPlaying(),
-    getChessProfile(1),
+    getChessProfile(5),
     getActivityWeek(),
   ]);
-  const lastGame = chess.recentGames[0];
   const isSnapshot = !np.live || !chess.live || !week.live;
 
   return (
@@ -55,38 +56,15 @@ export default async function NowPage() {
         </p>
       </header>
 
-      {/* Live strip */}
+      {/* Live strip — one themed card per source */}
       <Reveal>
-        <div className="frost mt-14 rounded-2xl border border-border px-6 py-6">
-          <div className="flex flex-col gap-4">
-            <NowPlayingLine np={np} />
-
-            {chess.ratings.blitz.current != null && (
-              <p className="font-mono text-mono uppercase tracking-widest text-text-lo">
-                <span className="text-text-lo/80">Chess · </span>
-                <a
-                  href="https://www.chess.com/member/nemoblob"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-text-mid underline-offset-4 transition-colors hover:text-accent"
-                >
-                  {chess.ratings.blitz.current} blitz
-                  {lastGame && (
-                    <span className="text-text-lo">
-                      {" "}
-                      — {RESULT_WORD[lastGame.result]} the last one vs{" "}
-                      {lastGame.opponent}
-                    </span>
-                  )}
-                </a>
-              </p>
-            )}
-
-            <StayingActiveLine week={week} />
-          </div>
+        <div className="mt-14 flex flex-col gap-3">
+          <SpotifyCard np={np} />
+          <ChessCard chess={chess} />
+          <TrainingCard week={week} />
 
           {isSnapshot && (
-            <p className="mt-5 border-t border-border pt-4 font-mono text-[0.68rem] uppercase tracking-wider text-text-lo/70">
+            <p className="mt-2 font-mono text-[0.68rem] uppercase tracking-wider text-text-lo/70">
               Showing a recent snapshot — live feed catches up shortly.
             </p>
           )}

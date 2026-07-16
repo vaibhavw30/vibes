@@ -199,6 +199,7 @@ The accent is a **single-line change**: swap `--accent` in `globals.css` and reb
 ### 3.5 Color rules
 
 - One accent. A second color only appears as a **data tick** (`--data-pos`/`--data-neg`) in quant/live-data contexts.
+- **Scoped exception — `/now` live cards (owner sign-off 2026-07-16).** The themed source cards in `src/components/now/live-cards.tsx` carry a *disciplined per-source brand tint* (Spotify green, Chess slate, Fitbit teal) on the slim left spine + the glyph badge/eyebrow only. This is deliberately contained to that one strip, where the cards represent real outside brands. Guardrails that keep it from becoming a colored template: **all body text stays neutral ink**, marks are neutral lucide glyphs (not brand logos), and the tint never bleeds into any shared component. Do not extend per-source tints beyond this file without a new sign-off.
 - Text must pass **AA on `--bg-0`** — verify `--text-lo` (`#6b7079` on `#0a0b0d`) especially; it's the riskiest pairing and is used only for non-essential metadata.
 - **No decorative gradients.** The only gradient in the build is inside the signature canvas (radial glow sprites + a faint mid-seam linear gradient), which is allowed as "depth behind the signature."
 
