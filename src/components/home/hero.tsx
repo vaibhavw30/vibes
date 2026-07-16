@@ -122,17 +122,6 @@ export function Hero({ breadcrumb }: { breadcrumb?: React.ReactNode }) {
             {breadcrumb}
           </motion.div>
         )}
-
-        {!reduce && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.72 }}
-            transition={{ duration: 0.6, delay: 1.1 }}
-            className="mt-10 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-text-lo"
-          >
-            ↳ it follows you
-          </motion.p>
-        )}
       </div>
     </section>
   );

@@ -8,10 +8,13 @@ import { useReducedMotion } from "motion/react";
  * after the cursor — on-concept for "the things I imagined as a kid" / flight /
  * daydreaming. It arrives with a fly-in from the left, trails the cursor a beat
  * behind on a spring, banks its nose along its velocity, bobs gently, and drifts in
- * a lazy figure-8 when the cursor is still. It also rides a subtle parallax on the
- * hero painting. pointer-events:none + aria-hidden — purely decorative, never blocks
- * the hero text. Under prefers-reduced-motion it renders one static resting frame
- * (no rAF, no listeners). Physics ported from the Claude Design mock.
+ * a lazy figure-8 when the cursor is still. It follows the cursor across the WHOLE
+ * home page (position:fixed + a window-level listener), not just the hero; it also
+ * rides a subtle parallax on the hero painting, but only while the cursor is over
+ * it. z-[9] keeps it behind the hero headline (z-10) yet above every scrolled
+ * section, and under the nav (z-40). pointer-events:none + aria-hidden — purely
+ * decorative, never blocks anything. Under prefers-reduced-motion it renders one
+ * static resting frame (no rAF, no listeners). Physics ported from the Claude mock.
  */
 export function PaperPlane({
   containerRef,
@@ -25,22 +28,21 @@ export function PaperPlane({
 
   useEffect(() => {
     const plane = planeRef.current;
-    const hero = containerRef.current;
     const bgAtMount = bgRef.current;
-    if (!plane || !hero) return;
+    if (!plane) return;
 
     // Reduced motion: a single static resting frame, no loop, no listeners.
     if (reduce) {
       plane.style.opacity = "0.9";
-      plane.style.transform = "translate(72%, 34%) rotate(-8deg)";
+      plane.style.transform = "translate(70vw, 40vh) rotate(-8deg)";
       return;
     }
 
-    const r0 = hero.getBoundingClientRect();
-    let tx = r0.width * 0.62;
-    let ty = r0.height * 0.34;
+    // Fixed positioning → everything is in viewport coordinates.
+    let tx = window.innerWidth * 0.62;
+    let ty = window.innerHeight * 0.42;
     let x = -80;
-    let y = r0.height * 0.5;
+    let y = window.innerHeight * 0.5;
     let vx = 0;
     let vy = 0;
     let angle = 0;
@@ -49,18 +51,25 @@ export function PaperPlane({
     const t0 = performance.now();
     let raf = 0;
 
+    // Follow the cursor across the whole page (window-level, viewport coords).
     const onMove = (e: PointerEvent) => {
-      const r = hero.getBoundingClientRect();
-      tx = e.clientX - r.left;
-      ty = e.clientY - r.top;
+      tx = e.clientX;
+      ty = e.clientY;
       idle = 0;
-      // The painting rides a gentle parallax along with the cursor.
-      const dx = tx / r.width - 0.5;
-      const dy = ty / r.height - 0.5;
+      // The hero painting rides a gentle parallax — but only while the cursor is
+      // actually over it on screen, so scrolled sections don't jerk the image.
+      const hero = containerRef.current;
       const bg = bgRef.current;
-      if (bg) bg.style.transform = `scale(1.06) translate(${dx * -14}px, ${dy * -10}px)`;
+      if (hero && bg) {
+        const r = hero.getBoundingClientRect();
+        if (e.clientY >= r.top && e.clientY <= r.bottom) {
+          const dx = (e.clientX - r.left) / r.width - 0.5;
+          const dy = (e.clientY - r.top) / r.height - 0.5;
+          bg.style.transform = `scale(1.06) translate(${dx * -14}px, ${dy * -10}px)`;
+        }
+      }
     };
-    hero.addEventListener("pointermove", onMove);
+    window.addEventListener("pointermove", onMove);
 
     const step = (now: number) => {
       const t = (now - t0) / 1000;
@@ -91,7 +100,7 @@ export function PaperPlane({
 
     return () => {
       cancelAnimationFrame(raf);
-      hero.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointermove", onMove);
       if (bgAtMount) bgAtMount.style.transform = "scale(1.06)";
     };
   }, [reduce, containerRef, bgRef]);
@@ -100,7 +109,7 @@ export function PaperPlane({
     <div
       ref={planeRef}
       aria-hidden="true"
-      className="pointer-events-none absolute left-0 top-0 z-[9] h-[52px] w-[52px] opacity-0 [will-change:transform]"
+      className="pointer-events-none fixed left-0 top-0 z-[9] h-[52px] w-[52px] opacity-0 [will-change:transform]"
       style={{ filter: "drop-shadow(0 8px 10px rgba(27,39,53,.22))" }}
     >
       <svg viewBox="0 0 48 48" width="52" height="52" fill="none">
