@@ -8,7 +8,7 @@ import { motion, useReducedMotion } from "motion/react";
 import type { Interest } from "@/content/about";
 
 /*
- * /about "Beyond the work" — the 8 interests as pieces on a faint 4×4 board.
+ * /about "Beyond the work" — the interests as pieces on a faint 4×4 board.
  * Left alone it plays itself (a piece slides to an open square every ~2s); hover
  * or keyboard-focus stalls the whole board so you can read and click. A tile on a
  * DARK square reads bolder + more opaque; on a LIGHT square it's airier, and it
@@ -23,8 +23,18 @@ import type { Interest } from "@/content/about";
 
 const COLS = 4;
 const ROWS = 4;
-// Balanced starting squares (cell index = r*COLS + c): 8 pieces on 16 squares.
-const INITIAL = [0, 2, 5, 7, 8, 10, 13, 15];
+
+// Deterministic starting squares, one per interest (cell index = r*COLS + c). A
+// stride of 5 is coprime with the 16-cell board, so successive pieces land on
+// distinct, well-spread squares with a balanced light/dark mix. No RNG → server
+// and client hydrate to the same board; pieces then drift via makeMove. Clamped to
+// the board's capacity so a growing interests list can never hand a tile an
+// undefined (NaN) grid cell — the bug that collapsed the whole board when a 9th
+// interest outgrew a hardcoded 8-square list.
+function initialPositions(n: number): number[] {
+  const total = COLS * ROWS;
+  return Array.from({ length: Math.min(n, total) }, (_, i) => (i * 5) % total);
+}
 
 const cellRC = (i: number) => ({ r: Math.floor(i / COLS), c: i % COLS });
 const parity = (i: number) => {
@@ -115,7 +125,9 @@ function makeMove(pos: number[]): number[] {
 
 export function InterestBoard({ interests }: { interests: Interest[] }) {
   const reduce = useReducedMotion() ?? false;
-  const [positions, setPositions] = useState<number[]>(INITIAL);
+  const [positions, setPositions] = useState<number[]>(() =>
+    initialPositions(interests.length),
+  );
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -159,7 +171,9 @@ export function InterestBoard({ interests }: { interests: Interest[] }) {
             {/* tile layer */}
             <div className="absolute inset-0 grid grid-cols-4 grid-rows-4 gap-2.5">
               {interests.map((interest, idx) => {
-                const cell = positions[idx];
+                // Guard against a positions/interests length drift — never let a
+                // tile fall through to an undefined (NaN) grid cell.
+                const cell = positions[idx] ?? idx % (COLS * ROWS);
                 const { r, c } = cellRC(cell);
                 return (
                   <motion.div
