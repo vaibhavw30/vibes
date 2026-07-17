@@ -30,7 +30,7 @@ export const projects: Project[] = [
     whyShort:
       "College storage is expensive, inconvenient, and low-trust. Students with spare space would rather earn money hosting it.",
     whyFull:
-      "As an out-of-state student, every May and August brought the same scramble: commercial units sold out months ahead, self-storage needed a car most freshmen don't have, and three-month minimums meant paying for unused time. Meanwhile students with space could be earning from it. BoxIt connects the two: priced per box, restricted to verified .edu peers, with a video-verified chain of custody so trust isn't left to chance.",
+      "As an out-of-state student, every May and August brought the same scramble: commercial units sold out months ahead, self-storage needed a car most freshmen don't have, and three-month minimums meant paying for unused time. Meanwhile students with space could be earning from it. BoxIt connects the two: priced per box, restricted to verified .edu peers, with a video-verified chain of custody.",
     whyStatus: "confirmed",
     typeTag: "Personal",
     domainTags: ["Systems/Backend", "Full-Stack", "Infra/Cloud"],

@@ -17,7 +17,7 @@
 
 /** Lead sentence under the About title. */
 export const aboutLead =
-  "I'm Vaibhav. I build things because I keep noticing problems I can't quite let go of.";
+  "I'm Vaibhav. I build things because I keep noticing problems I want to fix.";
 
 /** The through-line, pulled out as a serif aside. Do not turn it into a slogan. */
 export const aboutThroughLine =
