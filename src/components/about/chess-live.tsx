@@ -24,7 +24,7 @@ function RatingCard({ label, rating }: { label: string; rating: Rating }) {
         {label}
       </p>
       <p className="mt-2 font-serif text-[1.9rem] leading-none text-text-hi">
-        {rating.current ?? "—"}
+        {rating.current ?? "N/A"}
       </p>
       <p className="mt-2 font-mono text-[0.7rem] text-text-lo">
         {rating.best != null && (
