@@ -6,7 +6,7 @@ import { InterestBoard } from "@/components/about/interest-board";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Builder since childhood — plus cooking, a garden and beehives, chess, poker, debate, and film. The person behind the resume.",
+    "Builder since childhood, plus cooking, a garden and beehives, chess, poker, debate, and film. The person behind the resume.",
 };
 
 /*

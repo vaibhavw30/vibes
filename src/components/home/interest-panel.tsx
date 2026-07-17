@@ -277,7 +277,7 @@ const INTERESTS: Interest[] = [
     theme: { accent: "#8a6410", tint: "rgba(138,100,16,0.12)", wash: "rgba(138,100,16,0.08)" },
     Illustration: PodiumIcon,
     Body: DebateBody,
-    caption: "Ranked #19 in the country, once upon a time.",
+    caption: "Ranked as high as #19 in the country.",
   },
 ];
 
@@ -406,7 +406,7 @@ export function InterestPanel() {
         role="tabpanel"
         aria-labelledby={`${baseId}-tab-${active.id}`}
         className="relative block"
-        aria-label={`${active.label} — more`}
+        aria-label={`More about ${active.label}`}
       >
         <AnimatePresence mode="wait" custom={dir} initial={false}>
           <motion.div

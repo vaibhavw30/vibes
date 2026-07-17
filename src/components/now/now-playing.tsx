@@ -31,7 +31,7 @@ export function NowPlayingLine({ np }: { np: NowPlaying }) {
           className="text-text-mid underline-offset-4 transition-colors hover:text-accent"
         >
           {np.track}
-          <span className="text-text-lo"> — {np.artist}</span>
+          <span className="text-text-lo"> · {np.artist}</span>
         </a>
       </p>
     </div>

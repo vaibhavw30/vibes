@@ -150,7 +150,7 @@ export default async function ProjectDetailPage({
             </h2>
             {project.whyStatus === "draft" && (
               <span
-                title="Drafted from the repo — pending Vaibhav's review"
+                title="Drafted from the repo, pending Vaibhav's review"
                 className="font-mono text-[0.62rem] uppercase tracking-wider text-text-lo/70"
               >
                 draft

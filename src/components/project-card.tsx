@@ -53,7 +53,7 @@ export function ProjectCard({ project }: { project: Project }) {
         ))}
         {isDraft && (
           <span
-            title="Why is drafted from the repo — pending Vaibhav's review"
+            title="Why is drafted from the repo, pending Vaibhav's review"
             className="ml-auto font-mono text-[0.62rem] uppercase tracking-wider text-text-lo/70"
           >
             draft

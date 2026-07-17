@@ -15,20 +15,20 @@ export const metadata: Metadata = {
     template: "%s · Vaibhav Wudaru",
   },
   description:
-    "Georgia Tech CS student building from noticed problems — software, machine learning, and quant.",
+    "Georgia Tech CS student building from noticed problems in software, machine learning, and quant.",
   openGraph: {
     type: "website",
     siteName: "Vaibhav Wudaru",
     url: siteUrl,
     title: "Vaibhav Wudaru",
     description:
-      "Georgia Tech CS student building from noticed problems — software, machine learning, and quant.",
+      "Georgia Tech CS student building from noticed problems in software, machine learning, and quant.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Vaibhav Wudaru",
     description:
-      "Georgia Tech CS student building from noticed problems — software, machine learning, and quant.",
+      "Georgia Tech CS student building from noticed problems in software, machine learning, and quant.",
   },
 };
 

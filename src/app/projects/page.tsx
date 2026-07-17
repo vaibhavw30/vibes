@@ -5,7 +5,7 @@ import { ProjectsGrid } from "@/components/projects/projects-grid";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "A filterable grid of things Vaibhav built from problems he noticed — with the why behind each.",
+    "A filterable grid of things Vaibhav built from problems he noticed, with the why behind each.",
 };
 
 export default function ProjectsPage() {
@@ -19,7 +19,7 @@ export default function ProjectsPage() {
           Things I built from problems I noticed.
         </h1>
         <p className="measure mt-5 text-body text-text-mid">
-          Most of these started the same way — something bugged me enough to build
+          Most of these started the same way: something bugged me enough to build
           the fix. Filter by what kind of work it was, or by the domain it lives in.
         </p>
       </header>

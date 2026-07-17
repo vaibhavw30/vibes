@@ -26,7 +26,7 @@ export const experience: Experience[] = [
     timeframe: "Summer 2026",
     typeTag: "Internship",
     oneLine:
-      "Built the natural-language synthetic-data module — conversational schema edits and greenfield row generation over an agentic LLM loop — and shipped an 'Ask AI to fix' copilot for failed jobs.",
+      "Built the natural-language synthetic-data module (conversational schema edits and greenfield row generation over an agentic LLM loop) and shipped an 'Ask AI to fix' copilot for failed jobs.",
     oneLineStatus: "confirmed",
     status: "past", // TODO(vaibhav): confirm — internship still ongoing or wrapped?
   },
@@ -36,7 +36,7 @@ export const experience: Experience[] = [
     timeframe: "TODO(vaibhav)",
     typeTag: "Founding",
     oneLine:
-      "Founding-team software developer — built live REST API integrations and an AI autocomplete harness.",
+      "Founding-team software developer. Built live REST API integrations and an AI autocomplete harness.",
     oneLineStatus: "confirmed",
     status: "past",
   },
@@ -56,7 +56,7 @@ export const experience: Experience[] = [
     timeframe: "Incoming",
     typeTag: "Research",
     oneLine:
-      "Incoming quant developer/analyst on the $2.7M student-managed fund — building backtesting infrastructure and trading strategies.",
+      "Incoming quant developer/analyst on the $2.7M student-managed fund, building backtesting infrastructure and trading strategies.",
     oneLineStatus: "confirmed",
     status: "incoming",
   },
@@ -66,7 +66,7 @@ export const experience: Experience[] = [
     timeframe: "Incoming",
     typeTag: "Research",
     oneLine:
-      "Incoming researcher on the EPIC Prosthesis Team — deep learning and robotics for prosthetic control using inverse dynamics.",
+      "Incoming researcher on the EPIC Prosthesis Team, working on deep learning and robotics for prosthetic control using inverse dynamics.",
     oneLineStatus: "confirmed",
     status: "incoming",
   },

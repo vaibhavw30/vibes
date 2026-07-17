@@ -124,7 +124,7 @@ export function StayingActivePanel({
       {activityCount === 0 ? (
         <div className="frost rounded-xl border border-dashed border-border bg-bg-1/70 px-6 py-16 text-center">
           <p className="measure mx-auto text-small leading-relaxed text-text-mid">
-            Nothing logged this week — just getting the habit going. Sessions show
+            Nothing logged this week, just getting the habit going. Sessions show
             up here as I log them.
           </p>
         </div>

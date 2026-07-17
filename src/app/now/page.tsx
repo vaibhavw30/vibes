@@ -48,7 +48,7 @@ export default async function NowPage() {
           >
             now-page
           </a>{" "}
-          tradition — current focus, hand-written and low-maintenance, with a
+          tradition: current focus, hand-written and low-maintenance, with a
           little live data underneath.
         </p>
       </header>
@@ -62,7 +62,7 @@ export default async function NowPage() {
 
           {isSnapshot && (
             <p className="mt-2 font-mono text-[0.68rem] uppercase tracking-wider text-text-lo/70">
-              Showing a recent snapshot — live feed catches up shortly.
+              Showing a recent snapshot. Live feed catches up shortly.
             </p>
           )}
         </div>
@@ -76,7 +76,7 @@ export default async function NowPage() {
           </h2>
           <dl className="measure mt-6 space-y-6">
             <FocusRow label="Building">
-              This site (vaibhavwudaru.com), in the open — the thing you&rsquo;re
+              This site (vaibhavwudaru.com), in the open. The thing you&rsquo;re
               reading.
             </FocusRow>
             <FocusRow label="Next">
