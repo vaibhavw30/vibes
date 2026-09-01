@@ -163,6 +163,33 @@ export default async function ProjectDetailPage({
         </section>
       </Reveal>
 
+      {/* Design-level system shape — only for projects whose source stays private. */}
+      {project.architecture && (
+        <Reveal>
+          <section className="mt-16">
+            <h2 className="font-mono text-mono uppercase tracking-widest text-text-lo">
+              Architecture
+            </h2>
+            <p className="measure mt-4 text-body leading-relaxed text-text-mid">
+              {project.architecture.intro}
+            </p>
+            <ul className="measure mt-6 space-y-3">
+              {project.architecture.points.map((point) => (
+                <li key={point} className="flex gap-3">
+                  <span
+                    className="mt-[0.6em] size-1.5 shrink-0 rounded-full bg-accent/60"
+                    aria-hidden="true"
+                  />
+                  <span className="text-small leading-relaxed text-text-mid">
+                    {point}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </Reveal>
+      )}
+
       {project.metrics.length > 0 && (
         <Reveal>
           <section className="mt-16">

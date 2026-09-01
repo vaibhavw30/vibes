@@ -52,6 +52,21 @@ export const projects: Project[] = [
     coverImage: null,
     gallery: [],
     featured: true,
+    // Design-level only (schema note): the repo stays private through launch, so
+    // this describes the SHAPE of the system. No implementation, no business logic.
+    architecture: {
+      intro:
+        "The source stays private through launch, so this is the shape of the system rather than the code. It moves money between students and stores custody evidence, so most of the design work went into those two paths.",
+      points: [
+        "Booking lifecycle modeled as an 8-status state machine.",
+        "40 AWS Lambda services behind 35 REST endpoints, each route carrying its own rate limit.",
+        "Exactly-once payout settlement across 4 concurrent write paths, using per-tranche idempotency keys over an append-only ledger as the source of truth.",
+        "A lost update returns a 409 rather than allowing a silent overwrite.",
+        "Tenant isolation enforced by row-level-security policies in Postgres, not in application code.",
+        "A reconciliation sweep with severity-classified drift detectors, alerting on ledger and processor mismatch before it reaches a user.",
+        "2,680 automated tests, at a 3.3:1 backend test-to-code ratio.",
+      ],
+    },
   },
   {
     slug: "tariff-modelling",

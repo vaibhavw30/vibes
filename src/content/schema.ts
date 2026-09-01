@@ -66,6 +66,12 @@ export interface Project {
   gallery: string[];
   /** Surface on the home "selected work" teaser. */
   featured?: boolean;
+  /**
+   * Design-level system description, for projects whose source stays private.
+   * Shape only — no implementation details or business logic. Lets a reviewer who
+   * can't read the code still see how the system was designed. Omit elsewhere.
+   */
+  architecture?: { intro: string; points: string[] };
 }
 
 // Experience = real roles (Model 1). Kept separate from self-driven Projects so
