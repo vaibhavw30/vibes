@@ -239,7 +239,7 @@ const INTERESTS: Interest[] = [
     theme: { accent: "#2f7d54", tint: "rgba(47,125,84,0.12)", wash: "rgba(47,125,84,0.07)" },
     Illustration: RookIcon,
     Body: ChessBody,
-    caption: "Hovering around 1300, stubbornly.",
+    caption: "Around 1300, stubbornly.",
   },
   {
     id: "film",
@@ -266,7 +266,7 @@ const INTERESTS: Interest[] = [
     theme: { accent: "#c0553a", tint: "rgba(192,85,58,0.12)", wash: "rgba(192,85,58,0.07)" },
     Illustration: PotIcon,
     Body: KitchenBody,
-    caption: "Cooking pulled me into a garden, then beekeeping, then pollinator advocacy.",
+    caption: "Cooking pulled me into a garden, then beekeeping.",
   },
   {
     id: "debate",

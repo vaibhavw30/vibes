@@ -14,7 +14,7 @@ export default async function ChessPage() {
     <InterestSubpage
       eyebrow="About · Chess"
       title="Parked around 1300."
-      intro="I've been stuck near 1300 for a while and I'm stubborn about it. I keep playing anyway, mostly because losing a game I should have won is a very effective way to keep me up at night."
+      intro="I've been stuck near 1300 for a while and I'm stubborn about moving up. Ratings and recent games below, losses included."
     >
       <ChessLive {...profile} />
     </InterestSubpage>

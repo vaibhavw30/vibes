@@ -39,7 +39,7 @@ export default async function NowPage() {
           What I&rsquo;m on right now.
         </h1>
         <p className="measure mt-5 text-body leading-relaxed text-text-mid">
-          A living snapshot in the{" "}
+          In the{" "}
           <a
             href="https://nownownow.com/about"
             target="_blank"
@@ -48,8 +48,8 @@ export default async function NowPage() {
           >
             now-page
           </a>{" "}
-          tradition: current focus, hand-written and low-maintenance, with a
-          little live data underneath.
+          tradition: what I&rsquo;m focused on, hand-written, with some live data
+          underneath.
         </p>
       </header>
 
@@ -76,8 +76,7 @@ export default async function NowPage() {
           </h2>
           <dl className="measure mt-6 space-y-6">
             <FocusRow label="Building">
-              This site (vaibhavwudaru.com), in the open. The thing you&rsquo;re
-              reading.
+              This site (vaibhavwudaru.com), in the open.
             </FocusRow>
             <FocusRow label="Next">
               Heading into research at Georgia Tech&rsquo;s EPIC lab and a quant

@@ -22,8 +22,8 @@ export function SiteFooter() {
             Vaibhav Wudaru
           </Link>
           <p className="mt-2 text-small text-text-lo">
-            Building from noticed problems in software, machine learning, and
-            quant. Between the Bay Area and Atlanta.
+            Software, machine learning, and quant. Between the Bay Area and
+            Atlanta.
           </p>
         </div>
 

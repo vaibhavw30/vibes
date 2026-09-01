@@ -21,15 +21,15 @@ export const aboutLead =
 
 /** The through-line, pulled out as a serif aside. Do not turn it into a slogan. */
 export const aboutThroughLine =
-  "Almost everything I've built started as something I noticed and couldn't leave alone.";
+  "Almost everything here started as a problem I ran into myself.";
 
 /** Long-form narrative, paragraph by paragraph. All facts confirmed. */
 export const aboutBody = [
-  "I've been building things since I was a kid. The difference now is that they compile. Most of what I've made started the same way: something bugged me, and building the fix beat complaining about it.",
-  "At Georgia Tech I study computer science with a math minor, graduating in 2028. My work splits about three ways: software engineering, machine learning research, and quant finance. I like that they keep running into each other. So far that's meant founding-team engineering at a sports-odds startup, a software internship building natural-language data tooling, and research steering truth directions inside language models. Next, I'm joining Georgia Tech's $2.7M student-managed fund as a quant and the EPIC lab as a prosthesis researcher.",
-  "Away from a screen, most of it comes back to food. I started cooking with whole ingredients, which made me want to grow a few of them, which turned into an actual garden. The garden got me into beekeeping. The bees got me standing at a farmers' market explaining to strangers why pollinators are worth caring about. I didn't see that chain coming when it started.",
-  "I'm drawn to games that keep score but hide a lot of judgment underneath. I debated competitively and got as high as #19 in the country. I play poker, and once made the top 30 in my quant club's tournament. I'm parked around 1300 in chess and unreasonably stubborn about moving up. There's also basketball, too much fantasy football, and piano for when I want to think about nothing.",
-  "I split my time between the Bay Area and Atlanta, and I'm always up for comparing notes on any of the above.",
+  "I've been building things since I was a kid and never really stopped. These days that mostly means software.",
+  "At Georgia Tech I study computer science with a math minor, graduating in 2028. My work splits between software engineering, machine learning research, and quant finance, and I like that they keep running into each other. So far that's meant founding-team engineering at a sports-odds startup, a software internship building natural-language data tooling, and research on steering truth directions inside language models. Next I'm joining Georgia Tech's $2.7M student-managed fund as a quant and the EPIC lab as a prosthesis researcher.",
+  "Away from a screen, most of it comes back to food. I started cooking with whole ingredients, wanted to grow some of them, and ended up with a garden. That led to beekeeping, and the bees led to a farmers' market stall where I talk to strangers about pollinators.",
+  "I debated competitively and got as high as #19 in the country. I play poker and once made the top 30 in my quant club's tournament. I'm around 1300 in chess and stubborn about moving up. There's also basketball, too much fantasy football, and piano.",
+  "I split my time between the Bay Area and Atlanta.",
 ] as const;
 
 export type Interest = {
@@ -79,7 +79,7 @@ export const interests: Interest[] = [
   {
     slug: "training",
     label: "Staying active",
-    blurb: "Trying to turn the gym into a habit that sticks. I log it to stay honest.",
+    blurb: "Trying to make the gym a habit. I log it to stay honest.",
     href: "/about/training",
     live: true,
   },

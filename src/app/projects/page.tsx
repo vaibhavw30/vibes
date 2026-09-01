@@ -19,8 +19,8 @@ export default function ProjectsPage() {
           Things I built from problems I noticed.
         </h1>
         <p className="measure mt-5 text-body text-text-mid">
-          Most of these started the same way: something bugged me enough to build
-          the fix. Filter by what kind of work it was, or by the domain it lives in.
+          Most of these came out of something that annoyed me. Filter by type of
+          work or by domain.
         </p>
       </header>
 

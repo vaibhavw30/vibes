@@ -11,7 +11,7 @@ export default function CookingPage() {
     <InterestSubpage
       eyebrow="About · Kitchen"
       title="Made from whole ingredients."
-      intro="Cooking with whole ingredients is what started the whole chain: a garden, then beehives, then me at a farmers' market talking to strangers about pollinators. This is where the food part lives."
+      intro="Cooking with whole ingredients started the chain: a garden, then beehives, then a farmers' market stall. This is the food part."
     >
       <ComingLive note="A gallery of things I've actually made goes here: my own photos, not styled. It fills in as I cook." />
     </InterestSubpage>

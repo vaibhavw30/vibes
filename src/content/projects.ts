@@ -103,7 +103,7 @@ export const projects: Project[] = [
     whyShort:
       "Atlanta's food-insecurity problem was driven by disconnected food banks and missing information. I wanted to bridge that gap.",
     whyFull:
-      "Atlanta's food-insecurity problem wasn't only about supply. It was about connecting food banks with the people who needed them. Hours, eligibility, and ID requirements were scattered or missing. EquiTable finds pantries near any location, extracts that structured data with an LLM, and streams it onto a live map. A scheduled agent keeps it current so the information doesn't go stale.",
+      "Atlanta's food-insecurity problem was as much about connection as supply. Hours, eligibility, and ID requirements were scattered or missing. EquiTable finds pantries near any location, extracts that structured data with an LLM, and streams it onto a live map. A scheduled agent keeps it current so the information doesn't go stale.",
     whyStatus: "confirmed",
     typeTag: "Personal",
     domainTags: ["ML/AI", "Full-Stack", "Infra/Cloud"],
@@ -136,7 +136,7 @@ export const projects: Project[] = [
     whyShort:
       "Emergency demand is predictable, like Friday nights in the Bronx or summer weekends in Brooklyn. Ambulances still wait for the call instead of moving ahead of it.",
     whyFull:
-      "NYC EMS takes over 1.5 million calls a year. In the worst boroughs the average response runs past the 8-minute mark where cardiac-arrest survival drops fast. The problem isn't a shortage of ambulances; it's placement, and demand is predictable enough to stage for. FirstWave forecasts where calls will cluster over the next hour and shows dispatchers where to pre-position idle units before they come in. I led the frontend: the React and Mapbox dashboard that makes the forecast legible, and the FastAPI integration behind it, not the ML forecasting pipeline itself.",
+      "NYC EMS takes over 1.5 million calls a year. In the worst boroughs the average response runs past the 8-minute mark where cardiac-arrest survival drops fast. The problem is placement rather than the number of ambulances, and demand is predictable enough to stage for. FirstWave forecasts where calls will cluster over the next hour and shows dispatchers where to pre-position idle units before they come in. I led the frontend: the React and Mapbox dashboard that makes the forecast legible, and the FastAPI integration behind it, not the ML forecasting pipeline itself.",
     whyStatus: "draft",
     typeTag: "Hackathon",
     domainTags: ["Full-Stack", "Frontend", "Data"],
@@ -165,7 +165,7 @@ export const projects: Project[] = [
     whyShort:
       "I follow the NBA and I like prediction. I wanted to treat it like a market: a backtested engine against live prices, not gut calls.",
     whyFull:
-      "I follow the NBA and I like prediction, so I wanted to treat it the way a quant treats any market, with an actual model instead of gut calls. I built the engine in C++, backtested it against historical games, and wired it to the Kalshi API so the forecasts meet real prices.",
+      "I wanted to treat NBA games the way a quant treats any market, with a model instead of gut calls. I built the engine in C++, backtested it against historical games, and wired it to the Kalshi API so the forecasts meet real prices.",
     whyStatus: "confirmed",
     typeTag: "Personal",
     domainTags: ["Quant", "ML/AI", "Data"],
@@ -192,7 +192,7 @@ export const projects: Project[] = [
     whyShort:
       "The standard ways to find a 'truth direction' in a model, like linear probes and contrastive mean differences, leave signal on the table. I tried to feature-engineer better directions and steer on them.",
     whyFull:
-      "Truth and other high-level concepts show up as directions in a model's activations, but the usual ways to recover them (a linear probe, or the contrastive mean difference between true and false statements) are blunt. I treated it as a feature-engineering problem: find richer directions, then steer with XGBoost to move behavior further than the linear baselines could. The lesson on gemma-2-2b was that a direction you can decode at ~99% accuracy isn't necessarily one you can push. Reading a concept and steering it are not the same axis.",
+      "Truth and other high-level concepts show up as directions in a model's activations, but the usual ways to recover them (a linear probe, or the contrastive mean difference between true and false statements) are blunt. I treated it as a feature-engineering problem: find richer directions, then steer with XGBoost to move behavior further than the linear baselines could. On gemma-2-2b, a direction I could decode at ~99% accuracy still wasn't one I could steer on.",
     whyStatus: "draft",
     typeTag: "Research",
     domainTags: ["ML/AI", "Applied-Research"],
@@ -244,7 +244,7 @@ export const projects: Project[] = [
     whyShort:
       "I wanted to see whether my read on a market would hold up against a live order book, not just a clean backtest.",
     whyFull:
-      "IMC Prosperity drops you into a synthetic market where every timestep you submit orders against bots, and one-timestep order life plus position limits punish lazy assumptions. I wanted to know whether simple, well-understood strategies, like pinning a stable product to its fair value or trading a drifting one carefully, could survive adversarial fills. So I built the boring part first: EDA, honest baselines, and a backtester, then iterated.",
+      "IMC Prosperity drops you into a synthetic market where you submit orders against bots each timestep, with one-timestep order life and position limits. I wanted to know whether simple strategies, like pinning a stable product to its fair value or trading a drifting one carefully, could survive adversarial fills. I built the EDA, baselines, and a backtester first, then iterated.",
     whyStatus: "draft",
     typeTag: "Personal", // TODO(vaibhav): Personal vs Hackathon (multi-week competition)
     domainTags: ["Quant", "Data"],
@@ -268,7 +268,7 @@ export const projects: Project[] = [
       "Drug-drug interaction assistant: an evaluated RAG system with grounded, streamed answers for providers.",
     // DRAFT from README. Problem stated; keep the co-build + retrieval-focus honest.
     whyShort:
-      "Whether two prescriptions interact shouldn't come down to a provider's memory. But a tool that answers it is only useful if you can trust the answer.",
+      "Whether two prescriptions interact shouldn't come down to a provider's memory, and a lookup tool only helps if you can trust its answer.",
     whyFull:
       "Drug-drug interactions are exactly the kind of thing a computer should catch, but a lookup is only as good as its retrieval and its honesty about uncertainty. With Ashwin at HackGT, I rebuilt the assistant from a fragile FAISS name-lookup prototype into an evaluated RAG system: dense and hybrid retrieval, cross-encoder reranking, and answers streamed with their grounding, so the interaction risk it reports is defensible. I focused on retrieval and evaluation.",
     whyStatus: "draft",
@@ -295,7 +295,7 @@ export const projects: Project[] = [
     // DRAFT from the README's Motivation section. Note: this is the TEAM's framing
     // (GT Big Data fork) — confirm your specific contribution and personal angle.
     whyShort:
-      "Clean water fails quietly in the places with the least data. I wanted to see watershed risk and water-access gaps on a map before they turn into emergencies.",
+      "Water problems go undetected in the places with the least monitoring data. I wanted to see watershed risk and access gaps on a map before they turn into emergencies.",
     whyFull:
       "This started as a GT Big Data project around a real gap: many less-developed regions have too little infrastructure and data to catch contamination, predict floods or droughts, or track whether water stays affordable. The idea was to aggregate satellite imagery and historical datasets into one interface that geolocates watershed anomalies and inequities, so citizens and governments can act earlier. (Team effort; my specific contribution is flagged separately in the role field.)",
     whyStatus: "draft",

@@ -14,7 +14,7 @@ export default async function MoviesPage() {
     <InterestSubpage
       eyebrow="About · Film"
       title="Everything I watch."
-      intro="I log every film on Letterboxd. It's the closest thing I keep to a diary, and I'm not above rating something five stars for reasons I can't defend."
+      intro="I log every film on Letterboxd. The ratings are mine and not always defensible."
     >
       <MoviesGrid films={films} live={live} />
     </InterestSubpage>
