@@ -65,7 +65,7 @@
 
   /* type-tag colors — re-derived for a LIGHT ground (deeper, AA as small text on white) */
   --tag-internship: #3557b8; /* blue */
-  --tag-founding: #8a6410; /* dark goldenrod */
+  --tag-coursework: #8a6410; /* dark goldenrod (was Founding; slot reused to keep max 5) */
   --tag-research: #1f7a66; /* teal */
   --tag-personal: #5a49b8; /* violet */
   --tag-hackathon: #a8437f; /* magenta */
@@ -96,7 +96,7 @@
 
   /* type-tag colors */
   --color-tag-internship: var(--tag-internship);
-  --color-tag-founding: var(--tag-founding);
+  --color-tag-coursework: var(--tag-coursework);
   --color-tag-research: var(--tag-research);
   --color-tag-personal: var(--tag-personal);
   --color-tag-hackathon: var(--tag-hackathon);

@@ -6,7 +6,7 @@ import { Reveal, RevealItem, RevealStagger } from "@/components/reveal";
 /*
  * Experience timeline (Home - Polished). Real roles down a single gradient rail,
  * each anchored by a frosted initials avatar tinted by role type (neutral intern,
- * gold founding, green research) — incoming roles get the filled-accent treatment
+ * green research) — incoming roles get the filled-accent treatment
  * and an "Incoming" pill. Initials and tint are DERIVED from the existing content
  * (no schema change); copy stays Vaibhav's confirmed one-liners; timeframes render
  * only when set (TODO placeholders stay hidden, never guessed).
@@ -36,12 +36,6 @@ function avatarStyle(role: Experience): Avatar {
       color: "#2a67a6",
     };
   switch (role.typeTag) {
-    case "Founding":
-      return {
-        border: "1px solid rgba(138,100,16,.4)",
-        background: "rgba(255,255,255,.72)",
-        color: "#8a6410",
-      };
     case "Research":
       return {
         border: "1px solid rgba(31,122,102,.4)",

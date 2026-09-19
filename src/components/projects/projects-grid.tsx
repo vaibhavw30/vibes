@@ -23,7 +23,7 @@ const chipBase =
 
 const typeActive: Record<TypeTag, string> = {
   Internship: "border-tag-internship/50 bg-tag-internship/12 text-tag-internship",
-  Founding: "border-tag-founding/50 bg-tag-founding/12 text-tag-founding",
+  Coursework: "border-tag-coursework/50 bg-tag-coursework/12 text-tag-coursework",
   Research: "border-tag-research/50 bg-tag-research/12 text-tag-research",
   Personal: "border-tag-personal/50 bg-tag-personal/12 text-tag-personal",
   Hackathon: "border-tag-hackathon/50 bg-tag-hackathon/12 text-tag-hackathon",

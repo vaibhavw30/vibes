@@ -8,7 +8,7 @@ import type { DomainTag, TypeTag } from "@/content/schema";
 
 const typeStyle: Record<TypeTag, string> = {
   Internship: "text-tag-internship border-tag-internship/35 bg-tag-internship/10",
-  Founding: "text-tag-founding border-tag-founding/35 bg-tag-founding/10",
+  Coursework: "text-tag-coursework border-tag-coursework/35 bg-tag-coursework/10",
   Research: "text-tag-research border-tag-research/35 bg-tag-research/10",
   Personal: "text-tag-personal border-tag-personal/35 bg-tag-personal/10",
   Hackathon: "text-tag-hackathon border-tag-hackathon/35 bg-tag-hackathon/10",

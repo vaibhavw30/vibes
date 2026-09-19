@@ -175,7 +175,7 @@ All color is defined once in `src/app/globals.css` under `:root`, then mapped in
 | Token | Hex | Tag | Notes |
 |---|---|---|---|
 | `--tag-internship` | `#9fb4ff` | Internship | Periwinkle. |
-| `--tag-founding` | `#e8b04b` | Founding | Amber. |
+| `--tag-coursework` | `#e8b04b` | Coursework | Amber. (Was Founding; slot reused 2026-09 when no role carried it.) |
 | `--tag-research` | `#7dd3c0` | Research | Teal. |
 | `--tag-personal` | `#c8b6ff` | Personal | Violet — intentionally the accent family. |
 | `--tag-hackathon` | `#d9a0c8` | Hackathon | Muted magenta. |
@@ -557,7 +557,7 @@ Currently a `PageStub` (eyebrow "Now", title "What I'm on right now."). Phase 6 
 ### 11.1 Schema (`src/content/schema.ts`)
 
 **Controlled vocabulary (do not expand casually):**
-- `TYPE_TAGS` (exactly one per project): `Internship · Founding · Research · Personal · Hackathon`.
+- `TYPE_TAGS` (exactly one per project): `Internship · Coursework · Research · Personal · Hackathon`.
 - `DOMAIN_TAGS` (1–3 per project, neutral): `Quant · ML/AI · Systems/Backend · Full-Stack · Data · Infra/Cloud · Frontend · Applied-Research`.
 - `ProjectStatus`: `shipped | in-progress | coming-soon`.
 

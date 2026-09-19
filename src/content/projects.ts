@@ -352,10 +352,10 @@ export const projects: Project[] = [
     whyFull:
       "I soldered the electrical path, wrote the C firmware that reads a DHT temperature sensor and drives the actuator, and designed the mount in CAD. The motor stalled under torque. I traced it on the bench with a multimeter and found the fault was mechanical, not electrical: the mount was wrong. It took three printed revisions before the fit held under real load.",
     whyStatus: "draft",
-    typeTag: "Personal",
+    typeTag: "Coursework",
     domainTags: ["Hardware"],
     role: "Hardware and firmware",
-    timeframe: "TODO(vaibhav)",
+    timeframe: "Spring 2025 · class capstone",
     team: "TODO(vaibhav)",
     stack: ["Arduino", "C", "DHT sensor", "Motor driver", "Solenoid", "CAD + 3D printing"],
     metrics: [{ label: "Printed mount revisions", value: "3" }],

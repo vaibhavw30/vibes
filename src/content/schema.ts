@@ -6,7 +6,7 @@
 // Type tag — EXACTLY ONE per project. Visuals color-code off this (max 5 colors).
 export const TYPE_TAGS = [
   "Internship",
-  "Founding",
+  "Coursework",
   "Research",
   "Personal",
   "Hackathon",
@@ -81,12 +81,12 @@ export interface Project {
 }
 
 // Experience = real roles (Model 1). Kept separate from self-driven Projects so
-// internship / founding / research don't flatten into weekend builds.
+// internships / research don't flatten into weekend builds.
 export interface Experience {
   org: string;
   role: string;
   timeframe: string;
-  typeTag: Extract<TypeTag, "Internship" | "Founding" | "Research">;
+  typeTag: Extract<TypeTag, "Internship" | "Research">;
   oneLine: string;
   /**
    * Provenance of oneLine. "confirmed" = Vaibhav's own words. "draft" = a voiced
