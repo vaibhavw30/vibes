@@ -52,6 +52,8 @@ export const projects: Project[] = [
     metrics: [],
     repoUrl: null, // PRIVATE — never expose
     demoUrl: "https://boxit.best",
+    // PUBLIC design docs repo (no source): link it as docs, never as repoUrl.
+    docsUrl: "https://github.com/vaibhavw30/boxit-architecture",
     youtubeUrl: null,
     status: "coming-soon",
     coverImage: null,

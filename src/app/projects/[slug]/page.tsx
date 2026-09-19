@@ -99,7 +99,9 @@ export default async function ProjectDetailPage({
             </p>
           )}
 
-          {(clean(project.repoUrl) || (comingSoon && project.demoUrl)) && (
+          {(clean(project.repoUrl) ||
+            project.docsUrl ||
+            (comingSoon && project.demoUrl)) && (
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {clean(project.repoUrl) && (
                 <a
@@ -110,6 +112,17 @@ export default async function ProjectDetailPage({
                 >
                   <GitHubIcon className="size-4" />
                   Source
+                </a>
+              )}
+              {project.docsUrl && (
+                <a
+                  href={project.docsUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-small text-text-mid transition-colors hover:border-border-strong hover:text-text-hi"
+                >
+                  <GitHubIcon className="size-4" />
+                  Design docs
                 </a>
               )}
               {comingSoon && project.demoUrl && (

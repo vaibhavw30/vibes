@@ -59,6 +59,11 @@ export interface Project {
   /** null for private repos (e.g. BoxIt) — never expose. */
   repoUrl: string | null;
   demoUrl: string | null;
+  /**
+   * Public design documentation, for projects whose source stays private (BoxIt →
+   * boxit-architecture). Rendered as "Design docs", never as "Source".
+   */
+  docsUrl?: string;
   /** null until real demos are recorded (YouTube launches with placeholders). */
   youtubeUrl: string | null;
   status: ProjectStatus;
