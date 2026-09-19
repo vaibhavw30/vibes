@@ -523,7 +523,7 @@ Server page: `max-w-6xl pt-32 pb-28`, header (eyebrow "Projects", h1 "Things I b
 
 **Sections (top → bottom):**
 1. Back link "All projects" → `/projects`.
-2. **Header (NOT motion-gated — renders immediately, it's above-fold primary content):** TypePill + StatusBadge; serif `text-h1` title; `.measure` oneLiner; meta line = `[role, timeframe, team].filter(Boolean).join("  ·  ")`; then link row — a "Source" pill (only when `clean(repoUrl)`), and for coming-soon a "Visit boxit.best" accent CTA (when `demoUrl`).
+2. **Header (NOT motion-gated — renders immediately, it's above-fold primary content):** TypePill + StatusBadge; serif `text-h1` title; `.measure` oneLiner; meta line = `[role, timeframe, team].filter(Boolean).join("  ·  ")`; then link row — a "Source" pill (only when `clean(repoUrl)`), and an accent CTA labelled "Visit <host>" for any project with a `demoUrl` (host from `hostLabel()`, so BoxIt reads "Visit boxit.best" and EquiTable "Visit equi-table.vercel.app"). Only those two carry a `demoUrl` today.
 3. **Demo / tease slot** (Reveal): `ComingSoonTease` if coming-soon, else `DemoPlaceholder`.
 4. **"Why I built it"** (Reveal): mono heading + a **draft flag** when `whyStatus === "draft"`; `whyFull` in `font-serif text-h3 italic`.
 5. **Results** (Reveal, only if `metrics.length`): `<dl>` grid `sm:grid-cols-2` of metric tiles — label (mono `text-text-lo`) + value (serif `text-h3 text-data-pos`).

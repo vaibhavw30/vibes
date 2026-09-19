@@ -32,6 +32,15 @@ function clean(value: string | null): string | null {
   return value;
 }
 
+/** Label a live link by its own domain, so the CTA names where it goes. */
+function hostLabel(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
 const statusLabel: Record<Project["status"], string> = {
   shipped: "Shipped",
   "in-progress": "In progress",
@@ -101,7 +110,7 @@ export default async function ProjectDetailPage({
 
           {(clean(project.repoUrl) ||
             project.docsUrl ||
-            (comingSoon && project.demoUrl)) && (
+            project.demoUrl) && (
             <div className="mt-6 flex flex-wrap items-center gap-3">
               {clean(project.repoUrl) && (
                 <a
@@ -125,14 +134,14 @@ export default async function ProjectDetailPage({
                   Design docs
                 </a>
               )}
-              {comingSoon && project.demoUrl && (
+              {project.demoUrl && (
                 <a
                   href={project.demoUrl}
                   target="_blank"
                   rel="noreferrer"
                   className="group inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent-muted px-4 py-1.5 text-small text-text-hi transition-colors hover:border-accent/70"
                 >
-                  Visit boxit.best
+                  Visit {hostLabel(project.demoUrl)}
                   <ArrowRight
                     className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
                     aria-hidden="true"

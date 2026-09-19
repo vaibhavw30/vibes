@@ -146,7 +146,8 @@ export const projects: Project[] = [
       { label: "Architecture decision records", value: "31" },
     ],
     repoUrl: "https://github.com/vaibhavw30/EquiTable",
-    demoUrl: null,
+    // Frontend on Vercel, API on Render (both live, verified 2026-09-19).
+    demoUrl: "https://equi-table.vercel.app",
     youtubeUrl: null,
     status: "shipped",
     coverImage: null,
