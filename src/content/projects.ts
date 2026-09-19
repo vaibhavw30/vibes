@@ -11,6 +11,11 @@ import type { Project } from "./schema";
  *                  on some (esp. benchwarmer) still needs his confirmation; notes
  *                  inline. UI must visibly flag drafts (never ship as confirmed).
  *
+ * FACTS: numbers and framings follow Vaibhav's canonical fact ledger (2026-09).
+ * Never claim: BoxIt's CV fraud layer (not built), live trading / PnL for the
+ * benchwarmer engine (replay only), Spark on FirstWave (DuckDB only), the 24%
+ * EquiTable scraping figure (placeholder).
+ *
  * OTHER RULES HONORED:
  *  - BoxIt: repoUrl null (PRIVATE, never exposed); status "coming-soon"; boxit.best only.
  *  - FirstWave: role honesty — FRONTEND LEAD (React + Mapbox + FastAPI), not ML author.
@@ -36,7 +41,7 @@ export const projects: Project[] = [
     domainTags: ["Systems/Backend", "Full-Stack", "Infra/Cloud"],
     role: "Founder / builder",
     timeframe: "2026 to present",
-    team: "TODO(vaibhav): solo or team?",
+    team: "Solo, over six months",
     stack: [
       "React Native (Expo)",
       "AWS Lambda (Python)",
@@ -59,11 +64,11 @@ export const projects: Project[] = [
         "The source stays private through launch, so this is the shape of the system rather than the code. It moves money between students and stores custody evidence, so most of the design work went into those two paths.",
       points: [
         "Booking lifecycle modeled as an 8-status state machine.",
-        "40 AWS Lambda services behind 35 REST endpoints, each route carrying its own rate limit.",
-        "Exactly-once payout settlement across 4 concurrent write paths, using per-tranche idempotency keys over an append-only ledger as the source of truth.",
+        "41 services on AWS Lambda behind 35 REST endpoints, over a 12-table Postgres schema. Each route carries its own rate limit.",
+        "Exactly-once payout settlement across 4 concurrent write paths. Idempotency keys come from the payout itself, and an append-only, event-sourced ledger is the source of truth.",
         "A lost update returns a 409 rather than allowing a silent overwrite.",
         "Tenant isolation enforced by row-level-security policies in Postgres, not in application code.",
-        "A reconciliation sweep with severity-classified drift detectors, alerting on ledger and processor mismatch before it reaches a user.",
+        "A reconciliation sweep runs 10 severity-classified drift detectors against the payment processor, alerting on a mismatch before it reaches a user.",
         "2,680 automated tests, at a 3.3:1 backend test-to-code ratio.",
       ],
     },
@@ -72,11 +77,11 @@ export const projects: Project[] = [
     slug: "tariff-modelling",
     title: "Liberation Day and After",
     oneLiner:
-      "Structural breaks in U.S. equity sector correlations after the April 2025 tariff shock.",
+      "Whether the April 2025 tariff shock durably changed how U.S. equity sectors move together, and whether a forecast that says 70% is right 70% of the time.",
     whyShort:
       "I wanted to see how one big macro shock ripples through sectors and reshapes market structure.",
     whyFull:
-      "The April 2, 2025 tariff announcement was a clean natural experiment. I wanted to see whether the correlations between equity sectors actually broke in a structural way, not just noisily, in the days after. I tested it with the GICS sector ETFs against rates and volatility.",
+      "The April 2, 2025 tariff announcement was a clean natural experiment. I wanted to see whether the correlations between equity sectors actually broke in a structural way, not just noisily, in the days after. I ran structural-break tests, GARCH(1,1) volatility models, and a 2,000-iteration bootstrap over 11 sector ETFs and 323 trading days. Then I recalibrated the ensemble forecasts, because a model that's confidently wrong is a different problem from one that's honestly uncertain.",
     whyStatus: "confirmed",
     // Done for GTSF (quant training/mentorship). TODO(vaibhav): tag as Research
     // (GTSF-affiliated) or keep Personal? Leaning Research given the affiliation.
@@ -86,7 +91,11 @@ export const projects: Project[] = [
     timeframe: "Spring 2026",
     team: "GTSF (Georgia Tech Student Foundation)",
     stack: ["Python", "pandas", "Jupyter", "Yahoo Finance", "FRED"],
-    metrics: [],
+    metrics: [
+      { label: "Energy beta, conditioned on regime", value: "0.66 → 0.08" },
+      { label: "Expected calibration error", value: "0.050" },
+      { label: "Brier score", value: "0.2115" },
+    ],
     repoUrl: "https://github.com/vaibhavw30/tariff-modelling",
     demoUrl: null,
     youtubeUrl: null,
@@ -99,11 +108,11 @@ export const projects: Project[] = [
     slug: "equitable",
     title: "EquiTable",
     oneLiner:
-      "AI food-pantry discovery. Finds pantries near any location, extracts structured hours and eligibility, and streams them onto a live map.",
+      "Helps families find nearby food pantries with accurate hours. Agents scrape and grade pantry pages, escalating across three Gemini tiers when confidence drops, and stream results onto a live map.",
     whyShort:
       "Atlanta's food-insecurity problem was driven by disconnected food banks and missing information. I wanted to bridge that gap.",
     whyFull:
-      "Atlanta's food-insecurity problem was as much about connection as supply. Hours, eligibility, and ID requirements were scattered or missing. EquiTable finds pantries near any location, extracts that structured data with an LLM, and streams it onto a live map. A scheduled agent keeps it current so the information doesn't go stale.",
+      "Atlanta's food-insecurity problem was as much about connection as supply. Hours, eligibility, and ID requirements were scattered or missing. EquiTable finds pantries near any location, extracts that structured data with an LLM, and streams it onto a live map as each source resolves. The hard part is keeping it fresh, so a curator agent re-checks the stalest pantries first, and a crashed run resumes where it stopped instead of starting over.",
     whyStatus: "confirmed",
     typeTag: "Personal",
     domainTags: ["ML/AI", "Full-Stack", "Infra/Cloud"],
@@ -111,14 +120,18 @@ export const projects: Project[] = [
     timeframe: "2026",
     team: "TODO(vaibhav)",
     stack: [
-      "Python",
+      "React 19 + Vite",
+      "FastAPI",
       "LangGraph",
       "Gemini",
-      "Google Places API",
-      "AWS ECS Fargate",
+      "LangSmith",
       "MongoDB",
+      "Kubernetes",
     ],
-    metrics: [],
+    metrics: [
+      { label: "Tests", value: "246" },
+      { label: "Running cost", value: "$0/month" },
+    ],
     repoUrl: "https://github.com/vaibhavw30/EquiTable",
     demoUrl: null,
     youtubeUrl: null,
@@ -142,12 +155,13 @@ export const projects: Project[] = [
     domainTags: ["Full-Stack", "Frontend", "Data"],
     role: "Frontend lead (React + Mapbox dashboard, FastAPI integration)",
     timeframe: "2026 · GT Hacklytics",
-    team: "Hackathon team",
-    stack: ["React", "Mapbox", "FastAPI", "Python"],
+    team: "Four-person team",
+    stack: ["React", "Mapbox", "FastAPI", "Python", "XGBoost", "DuckDB", "OSMnx"],
     metrics: [
       // Real project results from the README (team outcome, not solo claim).
       { label: "Within 8-min window", value: "64.7% → 86.0%" },
       { label: "Bronx coverage", value: "48.2% → 96.7%" },
+      { label: "Median time saved", value: "3 min 19 sec" },
     ],
     repoUrl: "https://github.com/vaibhavw30/FirstWave",
     demoUrl: null,
@@ -161,19 +175,19 @@ export const projects: Project[] = [
     slug: "benchwarmer",
     title: "Benchwarmer",
     oneLiner:
-      "A C++ NBA prediction engine, backtested on historical games and wired to the Kalshi API.",
+      "An NBA prediction engine plus a C++20 market data recorder that rebuilds the order book from a live feed and replays any recorded session byte-for-byte.",
     whyShort:
       "I follow the NBA and I like prediction. I wanted to treat it like a market: a backtested engine against live prices, not gut calls.",
     whyFull:
-      "I wanted to treat NBA games the way a quant treats any market, with a model instead of gut calls. I built the engine in C++, backtested it against historical games, and wired it to the Kalshi API so the forecasts meet real prices.",
+      "I wanted to treat NBA games the way a quant treats any market, with a model instead of gut calls. I built the engine in C++, backtested it against historical games, and wired it to the Kalshi API so the forecasts meet real prices. The recorder replays every recorded session through the same ingest, decision, and execution path, so a change in behavior traces back to a commit. It has only ever run on replay, never with real money.",
     whyStatus: "confirmed",
     typeTag: "Personal",
     domainTags: ["Quant", "ML/AI", "Data"],
     role: "Solo",
     timeframe: "2026",
     team: "Solo",
-    stack: ["C++", "XGBoost", "Kalshi API", "Python"],
-    metrics: [],
+    stack: ["C++20", "Boost.Beast", "simdjson", "XGBoost", "Kalshi API", "Python"],
+    metrics: [{ label: "Byte-identical replay tests", value: "33" }],
     repoUrl: "https://github.com/vaibhavw30/benchwarmer",
     demoUrl: null,
     youtubeUrl: null,
@@ -197,9 +211,16 @@ export const projects: Project[] = [
     typeTag: "Research",
     domainTags: ["ML/AI", "Applied-Research"],
     role: "Researcher, Trustworthy Robotics Lab",
-    timeframe: "2026",
+    timeframe: "Apr 2026 to present",
     team: "Trustworthy Robotics Lab",
-    stack: ["Python", "PyTorch", "gemma-2-2b", "XGBoost", "NCSA DeltaAI (GH200)"],
+    stack: [
+      "Python",
+      "PyTorch",
+      "gemma-2-2b",
+      "Sparse autoencoders",
+      "XGBoost",
+      "NCSA DeltaAI (GH200)",
+    ],
     metrics: [],
     repoUrl: "https://github.com/vaibhavw30/llm-activation-steering-research",
     demoUrl: null,
@@ -213,7 +234,7 @@ export const projects: Project[] = [
     slug: "jobmaxxing",
     title: "jobmaxxing",
     oneLiner:
-      "Auto-updating, deduped Postgres feed of internship postings, with isolated pollers and a nightly digest.",
+      "Auto-updating, deduped Postgres feed of internship postings. Isolated pollers back off blocked sources, and an LLM only sees the records rules can't route.",
     // DRAFT from README. Problem is implicit but strongly supported by the design.
     whyShort:
       "Internship postings are scattered across a dozen boards and go stale fast. I was tired of refreshing all of them, so I built one feed that watches them for me.",
@@ -225,7 +246,7 @@ export const projects: Project[] = [
     role: "Solo",
     timeframe: "2026",
     team: "Solo",
-    stack: ["Python", "Supabase / Postgres", "GitHub Actions", "SMTP"],
+    stack: ["Python", "Supabase / Postgres", "Docker", "GitHub Actions", "MCP"],
     metrics: [],
     repoUrl: "https://github.com/vaibhavw30/jobmaxxing",
     demoUrl: null,
@@ -265,20 +286,23 @@ export const projects: Project[] = [
     slug: "clearrx",
     title: "clearRx",
     oneLiner:
-      "Drug-drug interaction assistant: an evaluated RAG system with grounded, streamed answers for providers.",
+      "Surfaces drug interaction risk to a clinician in one query instead of several lookups, with the source document behind every answer.",
     // DRAFT from README. Problem stated; keep the co-build + retrieval-focus honest.
     whyShort:
       "Whether two prescriptions interact shouldn't come down to a provider's memory, and a lookup tool only helps if you can trust its answer.",
     whyFull:
-      "Drug-drug interactions are exactly the kind of thing a computer should catch, but a lookup is only as good as its retrieval and its honesty about uncertainty. With Ashwin at HackGT, I rebuilt the assistant from a fragile FAISS name-lookup prototype into an evaluated RAG system: dense and hybrid retrieval, cross-encoder reranking, and answers streamed with their grounding, so the interaction risk it reports is defensible. I focused on retrieval and evaluation.",
+      "Drug-drug interactions are exactly the kind of thing a computer should catch, but a lookup is only as good as its retrieval and its honesty about uncertainty. It started as a team project at HackGT where I was a main contributor. Afterward I reworked it entirely on my own, replacing exact name matching with hybrid dense and BM25 retrieval plus cross-encoder reranking. Every retriever change was scored against an LLM-as-judge harness over 80+ labeled clinical queries, and every interaction it reports links to its source, because an unsourced answer isn't usable by someone about to act on it.",
     whyStatus: "draft",
     typeTag: "Hackathon",
     domainTags: ["ML/AI", "Full-Stack"],
-    role: "Co-built with Ashwin V, rebuilt the retrieval/RAG system",
+    role: "Main contributor on the team build, then rebuilt it solo",
     timeframe: "HackGT",
-    team: "Ashwin V + Vaibhav W",
-    stack: ["TypeScript", "Python", "BGE embeddings", "cross-encoder reranker", "SSE"],
-    metrics: [],
+    team: "Team project, then solo",
+    stack: ["TypeScript", "Python", "BGE embeddings", "BM25", "cross-encoder reranker", "Pinecone"],
+    metrics: [
+      { label: "Precision@5", value: "62% → 88%" },
+      { label: "Labeled clinical queries", value: "80+" },
+    ],
     repoUrl: "https://github.com/vaibhavw30/clearRx", // FORK (ashwinvijayakumar24/clearRx) — included per Vaibhav
     demoUrl: null,
     youtubeUrl: null,
@@ -297,15 +321,15 @@ export const projects: Project[] = [
     whyShort:
       "Water problems go undetected in the places with the least monitoring data. I wanted to see watershed risk and access gaps on a map before they turn into emergencies.",
     whyFull:
-      "This started as a GT Big Data project around a real gap: many less-developed regions have too little infrastructure and data to catch contamination, predict floods or droughts, or track whether water stays affordable. The idea was to aggregate satellite imagery and historical datasets into one interface that geolocates watershed anomalies and inequities, so citizens and governments can act earlier. (Team effort; my specific contribution is flagged separately in the role field.)",
+      "This started as a GT Big Data project around a real gap: many less-developed regions have too little infrastructure and data to catch contamination, predict floods or droughts, or track whether water stays affordable. The idea was to aggregate satellite imagery and historical datasets into one interface that geolocates watershed anomalies and inequities, so citizens and governments can act earlier. On a four-person team, I built the ML infrastructure: a supervised CNN in PyTorch on multi-year satellite imagery, served from a containerized Flask app on GCP.",
     whyStatus: "draft",
     typeTag: "Research", // TODO(vaibhav): Research vs Personal (GT Big Data club project)
     domainTags: ["ML/AI", "Data", "Applied-Research"],
-    role: "TODO(vaibhav): your contribution on the team",
-    timeframe: "2026",
-    team: "GT Big Data",
-    stack: ["Python", "Jupyter", "Computer vision (CNNs)", "Time-series (RNN/LSTM)"],
-    metrics: [],
+    role: "ML infrastructure developer",
+    timeframe: "Sept 2025 to May 2026",
+    team: "Big Data Big Impact (four people)",
+    stack: ["Python", "PyTorch", "Flask", "GCP", "SQL"],
+    metrics: [{ label: "Macro F1", value: "0.758" }],
     repoUrl: "https://github.com/vaibhavw30/aquatic-sustainability", // FORK (gt-big-data) — included per Vaibhav
     demoUrl: null,
     youtubeUrl: null,

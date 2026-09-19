@@ -33,7 +33,7 @@ export default async function NowPage() {
     <main className="mx-auto w-full max-w-3xl px-6 pb-28 pt-32">
       <header>
         <p className="font-mono text-mono uppercase tracking-widest text-text-lo">
-          Now · updated July 2026
+          Now · updated September 2026
         </p>
         <h1 className="mt-4 text-h1 font-serif text-text-hi">
           What I&rsquo;m on right now.
@@ -78,13 +78,13 @@ export default async function NowPage() {
             <FocusRow label="Building">
               This site (vaibhavwudaru.com), in the open.
             </FocusRow>
-            <FocusRow label="Next">
-              Heading into research at Georgia Tech&rsquo;s EPIC lab and a quant
-              seat at GTSF this fall.
-            </FocusRow>
             <FocusRow label="Right now">
-              Interning at DataMorph for the summer. My run as founding engineer
-              at OddsAreOn wrapped up in May.
+              Researching prosthesis control at Georgia Tech&rsquo;s EPIC lab and
+              working as a quant at GTSF, both since August.
+            </FocusRow>
+            <FocusRow label="This summer">
+              Interned at DataMorph.ai, building the agent layer of a data
+              platform.
             </FocusRow>
             <FocusRow label="Off-screen">
               Chess (stuck around 1300 and stubborn about it), cooking out of the

@@ -9,7 +9,7 @@ Personal-brand and content rules for `vaibhavwudaru.com`. Pair with the `dark-ed
 
 ## Who this is for
 
-Vaibhav Wudaru — Georgia Tech CS student (4.0, Math minor, grad May 2028). Works across **software engineering, machine learning research, and quantitative finance**, plus real range: founding engineer (OddsAreOn), SWE intern (DataMorph), researcher (Trustworthy Robotics; incoming EPIC), incoming quant (GTSF). Outside code: cooking, poker, chess (~1300), basketball, fantasy football, piano, film, competitive debate (#19 nationally). Based between the Bay Area and Atlanta.
+Vaibhav Wudaru — Georgia Tech CS student (4.0, Math minor, grad May 2028). Works across **software engineering, machine learning research, and quantitative finance**, plus real range: SWE intern (RIA Advisory 2024, OddsOn 2025, DataMorph.ai 2026), ML infra (Big Data Big Impact), researcher (Trustworthy Robotics; EPIC since Aug 2026), quant (GTSF since Aug 2026). Canonical facts live in his resume fact ledger — resumes lead, the site follows. Outside code: cooking, poker, chess (~1300), basketball, fantasy football, piano, film, competitive debate (#19 nationally). Based between the Bay Area and Atlanta.
 
 ## The through-line (shapes all copy)
 

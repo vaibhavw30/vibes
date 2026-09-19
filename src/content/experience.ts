@@ -3,72 +3,89 @@ import type { Experience } from "./schema";
 /*
  * Experience (Model 1) — real roles, kept separate from the Projects grid.
  *
- * One-liners below are now grounded in Vaibhav's own account (2026-07 review):
- *  - DataMorph: the June 2026 intern task plan (synthetic-data NL module + "Ask
- *    AI to fix" copilot). We describe HIS work, not the broader Agent Builder spec.
- *  - OddsAreOn: founding-team software developer — live REST API integrations +
- *    an AI autocomplete harness (sports-odds product).
- *  - Trustworthy Robotics: the `llm-activation-steering-research` repo IS this
- *    role's work — feature-engineering truth/modality directions, XGBoost steering.
- *  - GTSF: incoming quant dev/analyst on the $2.7M student-managed fund; the
- *    `tariff-modelling` project was done for GTSF. Not started; training completed.
- *  - EPIC: incoming ML/robotics researcher on the EPIC Prosthesis Team
- *    (epic.gatech.edu), inverse dynamics. Early — details light by his own note.
+ * Source of truth: Vaibhav's canonical fact ledger (2026-09). Resumes lead; the
+ * site follows. Titles, dates, and numbers below are copied from that ledger:
+ *  - OddsOn was a Software Engineer Intern role, May–Aug 2025 (NOT founding
+ *    engineer; the Jan–May 2026 dates on old resumes were wrong).
+ *  - GTSF fund is $3.1M (the earlier $2.7M is outdated). GTSF is not on the
+ *    ledger's locked timeline; kept here from his earlier account.
+ *  - EPIC: control-loop rate, model accuracy, and on-target latency are still
+ *    unmeasured. Never write numbers for them.
+ *  - Big Data Big Impact closes the Aug 2025 → May 2026 gap; keep it.
  *
- * Timeframes are only set where he gave one; the rest stay TODO(vaibhav). No
- * fabricated dates or metrics ($2.7M is his stated figure).
+ * Order: reverse chronological, current roles first.
  */
 
 export const experience: Experience[] = [
   {
-    org: "DataMorph",
-    role: "Software Engineering Intern",
-    timeframe: "Summer 2026",
-    typeTag: "Internship",
+    org: "EPIC Lab · Georgia Tech",
+    role: "Undergraduate ML Researcher (Prosthesis Team)",
+    timeframe: "Aug 2026 to present",
+    typeTag: "Research",
     oneLine:
-      "Built the natural-language synthetic-data module (conversational schema edits and greenfield row generation over an agentic LLM loop) and shipped an 'Ask AI to fix' copilot for failed jobs.",
+      "Train temporal convolutional networks on OpenSim inverse-dynamics targets for a powered knee-and-ankle prosthesis, running inside the real-time control loop on its embedded Linux controller.",
     oneLineStatus: "confirmed",
-    status: "past", // TODO(vaibhav): confirm — internship still ongoing or wrapped?
+    status: "current",
   },
   {
-    org: "OddsAreOn",
-    role: "Founding Engineer",
-    timeframe: "TODO(vaibhav)",
-    typeTag: "Founding",
+    org: "GTSF (Georgia Tech Student Foundation)",
+    role: "Quantitative Developer / Analyst",
+    timeframe: "Aug 2026 to present",
+    typeTag: "Research",
     oneLine:
-      "Founding-team software developer. Built live REST API integrations and an AI autocomplete harness.",
+      "Quant developer/analyst on the $3.1M student-managed fund, building backtesting infrastructure and trading strategies.",
+    oneLineStatus: "confirmed",
+    status: "current",
+  },
+  {
+    org: "DataMorph.ai",
+    role: "Software Engineer Intern",
+    timeframe: "May 2026 to Aug 2026",
+    typeTag: "Internship",
+    oneLine:
+      "Owned the agent layer of a data platform University of California campuses run analytics on: 21 MCP tools over a 29,980-node dependency graph, 45x less context per call, and agent reliability raised from 83% to 100%.",
     oneLineStatus: "confirmed",
     status: "past",
   },
   {
     org: "Trustworthy Robotics Lab",
     role: "Machine Learning Researcher",
-    timeframe: "TODO(vaibhav)",
+    timeframe: "Apr 2026 to present",
     typeTag: "Research",
     oneLine:
       "Feature-engineered truth and other modality directions in LLMs, steering with XGBoost to improve on linear-probe and contrastive-mean-difference baselines.",
     oneLineStatus: "confirmed",
-    status: "past", // TODO(vaibhav): current or past? (the repo is still active)
+    status: "current",
   },
   {
-    org: "GTSF (Georgia Tech Student Foundation)",
-    role: "Quantitative Developer / Analyst",
-    timeframe: "Incoming",
+    org: "Big Data Big Impact",
+    role: "ML Infrastructure Developer",
+    timeframe: "Sept 2025 to May 2026",
     typeTag: "Research",
     oneLine:
-      "Incoming quant developer/analyst on the $2.7M student-managed fund, building backtesting infrastructure and trading strategies.",
+      "Trained a supervised CNN in PyTorch on multi-year satellite imagery (macro F1 0.758) and served it from a containerized Flask app on GCP, on a four-person team.",
     oneLineStatus: "confirmed",
-    status: "incoming",
+    status: "past",
   },
   {
-    org: "EPIC Lab · Georgia Tech",
-    role: "ML / Robotics Researcher (Prosthesis Team)",
-    timeframe: "Incoming",
-    typeTag: "Research",
+    org: "OddsOn",
+    role: "Software Engineer Intern",
+    timeframe: "May 2025 to Aug 2025",
+    typeTag: "Internship",
     oneLine:
-      "Incoming researcher on the EPIC Prosthesis Team, working on deep learning and robotics for prosthetic control using inverse dynamics.",
+      "Built a sports prediction app on a four-person team: a multithreaded C++17 service sustaining 50K+ ops/sec at sub-millisecond latency, and a React Native client with 500+ monthly active users.",
     oneLineStatus: "confirmed",
-    status: "incoming",
+    status: "past",
+  },
+  {
+    org: "RIA Advisory",
+    role: "Software Engineer Intern",
+    timeframe: "Jun 2024 to Aug 2024",
+    typeTag: "Internship",
+    oneLine:
+      "Built enterprise applications in Java, Spring Boot, and MySQL for a global Oracle Cloud rollout at an 800+ consultant firm.",
+    oneLineStatus: "confirmed",
+    status: "past",
   },
 ];
 
