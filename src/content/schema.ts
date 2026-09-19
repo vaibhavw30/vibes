@@ -73,9 +73,9 @@ export interface Project {
   /** Surface on the home "selected work" teaser. */
   featured?: boolean;
   /**
-   * Design-level system description, for projects whose source stays private.
-   * Shape only — no implementation details or business logic. Lets a reviewer who
-   * can't read the code still see how the system was designed. Omit elsewhere.
+   * Design-level system description. Required context for private-source projects
+   * (BoxIt: shape only, no implementation or business logic), and optional for
+   * public ones where the design decisions are the signal (EquiTable's infra).
    */
   architecture?: { intro: string; points: string[] };
 }

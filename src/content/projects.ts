@@ -110,7 +110,7 @@ export const projects: Project[] = [
     slug: "equitable",
     title: "EquiTable",
     oneLiner:
-      "Helps families find nearby food pantries with accurate hours. Agents scrape and grade pantry pages, escalating across three Gemini tiers when confidence drops, and stream results onto a live map.",
+      "Helps families find nearby food pantries with accurate hours. A LangGraph agent scrapes pantry sites and extracts structured data with Gemini, and the API and agent run on Kubernetes with Prometheus and Grafana monitoring.",
     whyShort:
       "Atlanta's food-insecurity problem was driven by disconnected food banks and missing information. I wanted to bridge that gap.",
     whyFull:
@@ -127,12 +127,23 @@ export const projects: Project[] = [
       "LangGraph",
       "Gemini",
       "LangSmith",
-      "MongoDB",
+      "MongoDB Atlas",
       "Kubernetes",
+      "Prometheus + Grafana",
+      "Terraform",
     ],
+    // ACCURACY (Vaibhav's rules, 2026-09): Kubernetes is a local kind cluster, not
+    // production (API still on Render, prod schedule still ECS Fargate +
+    // EventBridge). Say "runs on / migrated to", never "in production". 74% is a
+    // share of the 128 pantries in the last successful scrape, not of attempts;
+    // never use the dashboard's n=2 50/50. No scale/load claims (HPA never scaled).
+    // Terraform written + validated, never applied. "$0" is scraping only; the
+    // whole system is ~$1.50–3/month.
     metrics: [
-      { label: "Tests", value: "246" },
-      { label: "Running cost", value: "$0/month" },
+      { label: "Pantries scraped by Crawl4AI", value: "~74% of 128" },
+      { label: "Scraping cost", value: "$0" },
+      { label: "Automated tests", value: "362" },
+      { label: "Architecture decision records", value: "31" },
     ],
     repoUrl: "https://github.com/vaibhavw30/EquiTable",
     demoUrl: null,
@@ -141,6 +152,18 @@ export const projects: Project[] = [
     coverImage: null,
     gallery: [],
     featured: true,
+    architecture: {
+      intro:
+        "The refresh agent is a LangGraph pipeline: a curator picks the stalest pantries, then a per-source subgraph scrapes, extracts, and validates each one, stepping up a three-tier Gemini ladder when extraction fails and stopping at a per-run budget. I migrated the API and the agent to Kubernetes to make that pipeline recoverable and observable.",
+      points: [
+        "Crash-resume that actually resumes. Checkpoints were being written but never read back, because every restart minted a new thread ID. Anchoring the MongoDB checkpointer to the Kubernetes Job name fixed it; killing a pod mid-crawl, the retry skipped the work already done.",
+        "Readiness checks MongoDB and liveness doesn't, so an Atlas blip pulls pods out of rotation instead of restarting all of them in a loop.",
+        "The crawl runs as a CronJob with Forbid concurrency and retry and deadline limits, behind default-deny NetworkPolicies enforced by Calico.",
+        "The API is scraped by Prometheus; the short-lived crawl pushes to a Pushgateway, since a 30-second pull would miss a pod that lives a few minutes.",
+        "A version-controlled Grafana dashboard and 4 alert rules. The job-failure alert ignores jobs that later succeed, so a successful crash-resume doesn't page, and the dashboard caught a scheduled run that had been silently dropped.",
+        "Crawl4AI handles most pages, with Jina Reader as a free fallback, so scraping costs nothing. Terraform codifies the namespace, service accounts, and Atlas setup.",
+      ],
+    },
   },
   {
     slug: "firstwave",

@@ -178,7 +178,7 @@ export default async function ProjectDetailPage({
         </section>
       </Reveal>
 
-      {/* Design-level system shape — only for projects whose source stays private. */}
+      {/* Design-level system shape (private-source projects, or where the design is the signal). */}
       {project.architecture && (
         <Reveal>
           <section className="mt-16">
