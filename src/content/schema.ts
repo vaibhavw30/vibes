@@ -23,6 +23,7 @@ export const DOMAIN_TAGS = [
   "Infra/Cloud",
   "Frontend",
   "Applied-Research",
+  "Hardware",
 ] as const;
 export type DomainTag = (typeof DOMAIN_TAGS)[number];
 

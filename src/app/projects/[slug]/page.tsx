@@ -148,6 +148,8 @@ export default async function ProjectDetailPage({
         <div className="mt-14">
           {comingSoon ? (
             <ComingSoonTease demoUrl={project.demoUrl} />
+          ) : youtubeId(project.youtubeUrl) ? (
+            <YouTubeEmbed id={youtubeId(project.youtubeUrl)!} title={project.title} />
           ) : (
             <DemoPlaceholder />
           )}
@@ -268,6 +270,29 @@ export default async function ProjectDetailPage({
         </section>
       </Reveal>
     </main>
+  );
+}
+
+/** Video ID from a youtu.be / youtube.com URL, or null if it isn't one. */
+function youtubeId(url: string | null): string | null {
+  if (!url) return null;
+  const m = url.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+/* Demo video. youtube-nocookie keeps tracking cookies off until the viewer hits play. */
+function YouTubeEmbed({ id, title }: { id: string; title: string }) {
+  return (
+    <div className="frost aspect-video w-full overflow-hidden rounded-xl border border-border">
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${id}`}
+        title={`${title} demo`}
+        loading="lazy"
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="size-full"
+      />
+    </div>
   );
 }
 

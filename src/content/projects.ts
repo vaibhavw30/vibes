@@ -340,6 +340,33 @@ export const projects: Project[] = [
     gallery: [],
     featured: false,
   },
+  {
+    slug: "automated-umbrella",
+    title: "Automated Umbrella",
+    oneLiner:
+      "A temperature-triggered umbrella built from bare components: Arduino firmware in C driving a motor and solenoid off a DHT sensor.",
+    // DRAFT: facts from the fact ledger; the personal motivation is unknown.
+    // TODO(vaibhav): why did you build it? Replace whyShort with your reason.
+    whyShort:
+      "The one project where I built the hardware and the software, and learned the software is only as good as the thing it drives.",
+    whyFull:
+      "I soldered the electrical path, wrote the C firmware that reads a DHT temperature sensor and drives the actuator, and designed the mount in CAD. The motor stalled under torque. I traced it on the bench with a multimeter and found the fault was mechanical, not electrical: the mount was wrong. It took three printed revisions before the fit held under real load.",
+    whyStatus: "draft",
+    typeTag: "Personal",
+    domainTags: ["Hardware"],
+    role: "Hardware and firmware",
+    timeframe: "TODO(vaibhav)",
+    team: "TODO(vaibhav)",
+    stack: ["Arduino", "C", "DHT sensor", "Motor driver", "Solenoid", "CAD + 3D printing"],
+    metrics: [{ label: "Printed mount revisions", value: "3" }],
+    repoUrl: null,
+    demoUrl: null,
+    youtubeUrl: "https://youtu.be/CNzC8-Uby8g",
+    status: "shipped",
+    coverImage: null,
+    gallery: [],
+    featured: false,
+  },
 ];
 
 /** Home "selected work" teaser — 3–4 featured projects (PRD §4.2). */

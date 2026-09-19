@@ -103,7 +103,7 @@ Home is a scrolling narrative. Each section is a "scene" with a scroll-triggered
 Two tag types per project:
 
 - **Type tag — exactly one:** `Internship` · `Founding` · `Research` · `Personal` · `Hackathon`
-- **Domain tags — 1 to 3:** `Quant` · `ML/AI` · `Systems/Backend` · `Full-Stack` · `Data` · `Infra/Cloud` · `Frontend` · `Applied-Research`
+- **Domain tags — 1 to 3:** `Quant` · `ML/AI` · `Systems/Backend` · `Full-Stack` · `Data` · `Infra/Cloud` · `Frontend` · `Applied-Research` · `Hardware`
 
 Color-code visuals off the **type** tag (max 5 colors). Domain tags stay neutral. Cap domain tags at 3 per card to avoid clutter. Example — BoxIt: `Personal` (type) + `Systems/Backend`, `Full-Stack`, `Infra/Cloud` (domain).
 

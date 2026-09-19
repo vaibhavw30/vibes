@@ -34,7 +34,7 @@ Every project carries a mission statement about **the problem that motivated it*
 ## Tag taxonomy (controlled — don't expand casually)
 
 - **Type tag — exactly one:** `Internship` · `Founding` · `Research` · `Personal` · `Hackathon`. Color-code visuals off this (max 5 colors).
-- **Domain tags — 1 to 3:** `Quant` · `ML/AI` · `Systems/Backend` · `Full-Stack` · `Data` · `Infra/Cloud` · `Frontend` · `Applied-Research`. Neutral color. Cap at 3 per card.
+- **Domain tags — 1 to 3:** `Quant` · `ML/AI` · `Systems/Backend` · `Full-Stack` · `Data` · `Infra/Cloud` · `Frontend` · `Applied-Research` · `Hardware`. Neutral color. Cap at 3 per card.
 
 ## Work architecture
 
